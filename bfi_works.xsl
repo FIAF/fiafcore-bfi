@@ -19,9 +19,16 @@
             <xsl:for-each select="recordList/record">
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
                     <rdf:type rdf:resource="bfi://ontology/work" />
+
+                    <!-- question, does this handle multiples? -->
+
+                    <xsl:variable name="country" select="translate(production_country, ' ', '_')" />
+                    <fiaf:hasCountry rdf:resource="bfi://ontology/country/{$country}" />
+
                 </rdf:Description>
+
             </xsl:for-each>
         </rdf:RDF>
     </xsl:template>
-    
+
 </xsl:stylesheet>
