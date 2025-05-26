@@ -23,7 +23,7 @@
                     <!-- question, does this handle multiples? -->
 
                     <xsl:variable name="country" select="translate(production_country, ' ', '_')" />
-                    <fiaf:hasCountry rdf:resource="bfi://ontology/country/{$country}" />
+                    <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
 
                 </rdf:Description>
 
