@@ -4,16 +4,6 @@ import pathlib
 import pydash
 import xmltodict
 
-# with open(pathlib.Path.cwd() / 'data' / 'BFI_FIAF_LOD_Works.xml') as xml_data:
-#     xml_data = xml_data.read()
-#     xml_data = xmltodict.parse(xml_data)['adlibXML']['recordList']['record']
-
-# record_keys = list()
-# for r in xml_data[:200]:
-#     record_keys += r.keys()
-# record_keys = pydash.uniq(record_keys)
-# print(len(record_keys))
-
 # transformation via xslt to fiafcore structures.
 
 data = etree.parse(str(pathlib.Path.cwd() / 'data' / 'BFI_FIAF_LOD_Works.xml'))
