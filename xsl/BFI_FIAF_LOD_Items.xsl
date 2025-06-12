@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- BFI XML data to FIAFcore -->
+<!-- BFI XML Item data to FIAFcore -->
 <!-- Paul Duchesne -->
 <!-- 2025-05-22 -->
 
@@ -12,18 +12,18 @@
 
     <xsl:output method="xml" indent="yes" />
 
-    <!-- Work -->
+    <!-- Items -->
 
     <xsl:template match="/adlibXML">
         <rdf:RDF>
             <xsl:for-each select="recordList/record">
-                <rdf:Description rdf:about="bfi://resource/work/{@priref}">
-                    <rdf:type rdf:resource="bfi://ontology/work" />
+                <rdf:Description rdf:about="bfi://resource/item/{@priref}">
+                    <rdf:type rdf:resource="bfi://ontology/item" />
 
                     <!-- question, does this handle multiples? -->
 
-                    <xsl:variable name="country" select="translate(production_country, ' ', '_')" />
-                    <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
+                    <!-- <xsl:variable name="country" select="translate(production_country, ' ', '_')" /> -->
+                    <!-- <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" /> -->
 
                 </rdf:Description>
 

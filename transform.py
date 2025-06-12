@@ -1,25 +1,59 @@
 from lxml import etree
 import rdflib
 import pathlib
-import pydash
-import xmltodict
+
+def transform(tier):
+
+    data = etree.parse(str(pathlib.Path.cwd() / 'xml' / f'{tier}.xml'))
+    xsl_file = etree.parse(str(pathlib.Path.cwd() / 'xsl' / f'{tier}.xsl'))
+    transform = etree.XSLT(xsl_file)
+    result = transform(data)
+
+    return rdflib.Graph().parse(data=str(result), format='xml')
+
+def authority(source_id):
+
+    # TODO, lookup source id on authority db
+    # if it exists, return fiafcore id
+    # else, generate, and then return.
+
+    pass
 
 # transformation via xslt to fiafcore structures.
 
-data = etree.parse(str(pathlib.Path.cwd() / 'data' / 'BFI_FIAF_LOD_Works.xml'))
-xsl_file = etree.parse(str(pathlib.Path.cwd() / 'bfi_works.xsl'))
-transform = etree.XSLT(xsl_file)
-result = transform(data)
-turtle = rdflib.Graph().parse(data=str(result), format='xml')
+g = rdflib.Graph()
+g += transform('BFI_FIAF_LOD_Works')
+g += transform('BFI_FIAF_LOD_Manifestations')
+g += transform('BFI_FIAF_LOD_Items')
+
+# authority harmonisation via mongo.
+
+# 
+
+
 
 # mapping, ontology and vocabulary elements to fiafcore.
 
-turtle_string = turtle.serialize(format='longturtle')
+turtle_string = g.serialize(format='longturtle')
 turtle_string = turtle_string.replace('<bfi://ontology/work>', '<https://ontology.fiafcore.org/Work>')
+
+
+
+
+#    ''' Sequential processes. '''
+
+#     turtle = transform(xml)
+#     turtle = mapping(turtle)
+#     turtle = authority(db, turtle)
+
+#     return turtle
 
 # authority, entities to fiafcore pids.
 
-print(len(turtle))
+# print(len(turtle))
 
 # print(turtle.serialize(format='longturtle'))
 # print(turtle_string)
+
+
+print(len(g))
