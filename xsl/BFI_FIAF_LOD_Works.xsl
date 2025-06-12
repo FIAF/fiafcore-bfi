@@ -20,6 +20,12 @@
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
                     <rdf:type rdf:resource="bfi://ontology/work" />
 
+                    <!-- fiaf:hasManifestation -->
+
+                    <xsl:for-each select="Parts">
+                        <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" />
+                    </xsl:for-each>
+                    
                     <!-- question, does this handle multiples? -->
 
                     <!-- <xsl:variable name="country" select="translate(production_country, ' ', '_')" /> -->

@@ -9,7 +9,7 @@ def pull_keys(xml_path):
 
 	print(xml_path)
 
-	xml_path = pathlib.Path.cwd() / 'data' / xml_path
+	xml_path = pathlib.Path.cwd() / 'xml' / xml_path
 	with open(xml_path) as xml_data:
 	    xml_data = xml_data.read()
 	    xml_data = xmltodict.parse(xml_data)['adlibXML']['recordList']['record']

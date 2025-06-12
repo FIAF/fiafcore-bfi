@@ -26,18 +26,29 @@ g += transform('BFI_FIAF_LOD_Works')
 g += transform('BFI_FIAF_LOD_Manifestations')
 g += transform('BFI_FIAF_LOD_Items')
 
+
+
 # authority harmonisation via mongo.
 
 # 
 
 
+# print(g.serialize(format='longturtle'))
 
 # mapping, ontology and vocabulary elements to fiafcore.
 
-turtle_string = g.serialize(format='longturtle')
-turtle_string = turtle_string.replace('<bfi://ontology/work>', '<https://ontology.fiafcore.org/Work>')
+# turtle_string = g.serialize(format='longturtle')
+# turtle_string = turtle_string.replace('<bfi://ontology/work>', '<https://ontology.fiafcore.org/Work>')
 
 
+
+for s,p,o in g.triples((rdflib.URIRef('bfi://resource/work/150335572'), None, None)):
+    print(s,p,o)
+    for a,b,c in g.triples((o, None, None)):
+        print(a,b,c)
+    print('\n')
+
+print(len(g))
 
 
 #    ''' Sequential processes. '''
@@ -56,4 +67,4 @@ turtle_string = turtle_string.replace('<bfi://ontology/work>', '<https://ontolog
 # print(turtle_string)
 
 
-print(len(g))
+# print(len(g))
