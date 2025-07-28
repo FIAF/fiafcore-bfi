@@ -1,2 +1,3 @@
 xml/
-temp.ipynb
+.env
+fiafcore_bfi.ttl

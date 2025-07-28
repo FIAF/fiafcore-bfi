@@ -22,9 +22,9 @@
 
                     <!-- fiaf:hasManifestation -->
 
-                    <xsl:for-each select="Parts">
-                        <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" />
-                    </xsl:for-each>
+                    <!-- <xsl:for-each select="Parts"> -->
+                        <!-- <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" /> -->
+                    <!-- </xsl:for-each> -->
                     
                     <!-- question, does this handle multiples? -->
 
