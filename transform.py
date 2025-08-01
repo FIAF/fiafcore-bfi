@@ -32,30 +32,9 @@ def authority(graph_in):
     print(len(work_ids))
     print((work_ids[:3]))
 
-
-
-
-    # dotenv.load_dotenv()
-    # atlas_user, atlas_pass = os.getenv('atlas_username'), os.getenv('atlas_password')
-    # client = pymongo.MongoClient(f'mongodb+srv://{atlas_user}:{atlas_pass}@fiaf-auth.frdajdk.mongodb.net/?retryWrites=true&w=majority&appName=fiaf-auth')
-    # db = client["fiafauth"] 
-
-
-
-        # print('@@@', s)
-
-
-
-    # copy find and replace as above,
-    # first pull all "works"
-    # then find all those that exist in mongo, if not create
-    # build a dict of transforms
-    # apply and return
-
-#     # TODO, lookup source id on authority db
-#     # if it exists, return fiafcore id
-#     # else, generate, and then return.
-
+    # loop through work_ids, if exists, add to dict
+    # if not, create and add to dict
+    # replace nodes from dict
 
     return graph_in
 
