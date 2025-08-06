@@ -77,7 +77,7 @@ def main():
 
     # fiafcore authority ids for entities.
 
-    g = authority(g)
+    # g = authority(g)
 
     # write resulting rdf.
 

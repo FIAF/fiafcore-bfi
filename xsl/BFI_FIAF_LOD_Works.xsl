@@ -20,6 +20,20 @@
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
                     <rdf:type rdf:resource="bfi://ontology/work" />
 
+                        <!-- Work Identifier -->
+
+                        <fiaf:hasIdentifier>
+                            <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
+                                <rdf:type rdf:resource="bfi://ontology/identifier"/>
+                                <fiaf:hasIdentifierValue>
+                                    <xsl:value-of select="@priref"/>
+                                </fiaf:hasIdentifierValue>
+                                <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                            </rdf:Description>
+                        </fiaf:hasIdentifier>
+
+
+
                     <!-- fiaf:hasManifestation -->
 
                     <!-- <xsl:for-each select="Parts"> -->
