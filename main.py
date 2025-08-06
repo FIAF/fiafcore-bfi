@@ -82,7 +82,8 @@ def main():
     # write resulting rdf.
 
     g.serialize(
-        destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="longturtle"
+        destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", 
+        format="longturtle"
     )
 
 
