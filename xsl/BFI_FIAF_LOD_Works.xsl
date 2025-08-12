@@ -17,7 +17,6 @@
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
 
                     <!-- fiafcore:Work -->
-                    <!-- note that work subclass is not visible. -->
 
                     <rdf:type rdf:resource="bfi://ontology/work" />
 
@@ -27,8 +26,20 @@
                         <xsl:variable name="country" select="translate(., ' ', '_')" />
                         <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
                     </xsl:for-each>
-                    
+
                     <!-- fiafcore:hasEvent -->
+
+                    <!-- TODO add credits under a production event -->
+
+                    <!-- TODO also see release date below -->
+
+                    <!-- <Title_date> -->
+                    <!-- <title_date_start tag="w1" occ="1">1924</title_date_start> -->
+                    <!-- <title_date.type tag="w5" occ="1"> -->
+                    <!-- <value lang="neutral">03_R</value> -->
+                    <!-- <value lang="0">Release</value> -->
+                    <!-- </title_date.type> -->
+                    <!-- </Title_date> -->
 
                     <!-- fiafcore:hasGenre -->
 
@@ -43,11 +54,11 @@
 
                     <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
-                            <rdf:type rdf:resource="bfi://ontology/identifier"/>
+                            <rdf:type rdf:resource="bfi://ontology/identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@priref"/>
+                                <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
-                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi" />
                         </rdf:Description>
                     </fiaf:hasIdentifier>
 
@@ -58,7 +69,7 @@
                     <xsl:for-each select="Parts">
                         <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" />
                     </xsl:for-each>
-                    
+
                     <!-- fiafcore:hasSubject -->
 
                     <xsl:for-each select="Content_subject/content.subject">
@@ -67,6 +78,17 @@
                     </xsl:for-each>
 
                     <!-- fiafcore:hasTitle -->
+
+                    <xsl:for-each select="Title">
+                        <fiaf:hasTitle>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="bfi://ontology/title/{title.type/value}" />
+                                <fiaf:hasTitleValue>
+                                    <xsl:value-of select="concat(title.article, ' ', title)" />
+                                </fiaf:hasTitleValue>
+                            </rdf:Description>
+                        </fiaf:hasTitle>
+                    </xsl:for-each>
 
                     <!-- fiafcore:hasVariant -->
 
