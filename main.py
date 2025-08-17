@@ -8,15 +8,6 @@ import tqdm
 import uuid
 
 
-def transform(tier):
-    data = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
-    xsl_file = etree.parse(str(pathlib.Path.cwd() / "xsl" / f"{tier}.xsl"))
-    transform = etree.XSLT(xsl_file)
-    result = transform(data)
-
-    return rdflib.Graph().parse(data=str(result), format="xml")
-
-
 def harmonise(graph):
     turtle_string = graph.serialize(format="longturtle")
 
@@ -54,9 +45,52 @@ def authority(graph):
 
     turtle_string = graph.serialize(format="longturtle")
     for k, v in authority.items():
-        turtle_string = turtle_string.replace(f'<{k}>', f'<{v}>')
+        turtle_string = turtle_string.replace(f"<{k}>", f"<{v}>")
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
+
+
+def transform(tier):
+    graph = rdflib.Graph()
+
+    xml_works = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
+    xml_works = [x for x in xml_works.findall(".//record")]
+    print(len(xml_works))
+    for xml in tqdm.tqdm(xml_works, desc=tier):
+        # # last laugh filter.
+
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150335572':
+        #         continue
+
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '152148202':
+        #         continue
+
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '152744617':
+        #         continue
+
+        # transformation via xslt to fiafcore structures.
+
+        xsl_file = etree.parse(str(pathlib.Path.cwd() / "xsl" / f"{tier}.xsl"))
+        transform = etree.XSLT(xsl_file)
+        result = transform(xml)
+        g = rdflib.Graph().parse(data=str(result), format="xml")
+
+        # harmonise vocabulary terms to fiafcore.
+
+        g = harmonise(g)
+
+        # fiafcore authority ids for entities.
+
+        # g = authority(g)
+
+        # collect output into main graph.
+
+        graph += g
+
+    return graph
 
 
 def main():
@@ -64,27 +98,18 @@ def main():
 
     dotenv.load_dotenv()
 
-    # transformation via xslt to fiafcore structures.
+    # transform data.
 
     g = rdflib.Graph()
     g += transform("BFI_FIAF_LOD_Works")
-    # g += transform('BFI_FIAF_LOD_Manifestations')
-    # g += transform('BFI_FIAF_LOD_Items')
-
-    # harmonise vocabulary terms to fiafcore.
-
-    g = harmonise(g)
-
-    # fiafcore authority ids for entities.
-
-    # g = authority(g)
+    g += transform("BFI_FIAF_LOD_Manifestations")
+    g += transform("BFI_FIAF_LOD_Items")
 
     # write resulting rdf.
 
-    g.serialize(
-        destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", 
-        format="longturtle"
-    )
+    print(len(g))
+
+    g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
 
 
 if __name__ == "__main__":

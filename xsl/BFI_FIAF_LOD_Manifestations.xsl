@@ -14,9 +14,9 @@
 
     <!-- Manifestations -->
 
-    <xsl:template match="/adlibXML">
+    <xsl:template match="/">
         <rdf:RDF>
-            <xsl:for-each select="recordList/record">
+            <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}">
                     <rdf:type rdf:resource="bfi://ontology/manifestation" />
 

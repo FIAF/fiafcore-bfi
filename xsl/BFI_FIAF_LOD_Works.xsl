@@ -11,9 +11,9 @@
 
     <xsl:output method="xml" indent="yes" />
 
-    <xsl:template match="/adlibXML">
+    <xsl:template match="/">
         <rdf:RDF>
-            <xsl:for-each select="recordList/record">
+            <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
 
                     <!-- fiafcore:Work -->
@@ -73,8 +73,9 @@
                     <!-- fiafcore:hasSubject -->
 
                     <xsl:for-each select="Content_subject/content.subject">
-                        <xsl:variable name="subject" select="translate(., ' ', '_')" />
-                        <fiaf:hasSubject rdf:resource="bfi://vocabulary/subject/{$subject}" />
+                        <xsl:variable name="subject1" select="translate(., ' ', '_')" />
+                        <xsl:variable name="subject2" select="translate($subject1, '`', '_')" />
+                        <fiaf:hasSubject rdf:resource="bfi://vocabulary/subject/{$subject2}" />
                     </xsl:for-each>
 
                     <!-- fiafcore:hasTitle -->
