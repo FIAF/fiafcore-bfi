@@ -41,14 +41,14 @@
                     <!-- </title_date.type> -->
                     <!-- </Title_date> -->
 
+                    <!-- fiafcore:hasForm -->
+
                     <!-- fiafcore:hasGenre -->
 
                     <xsl:for-each select="Content_genre/content.genre">
                         <xsl:variable name="genre" select="translate(., ' ', '_')" />
                         <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre}" />
                     </xsl:for-each>
-
-                    <!-- fiafcore:hasForm -->
 
                     <!-- fiafcore:hasIdentifier -->
 

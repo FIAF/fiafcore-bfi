@@ -4,40 +4,20 @@ Conformation of BFI data to FIAFcore.
 
 **Mapping: Work**
 
-| FIAFcore | BFI |
-| -- | -- |
-| rdf:type |  |
-| fiafcore:hasCountry | production_country/text |
-| fiafcore:hasForm |  |
-| fiafcore:hasGenre | Content_genre/content.genre/text |
-| fiafcore:hasIdentifier/fiafcore:hasIdentifierValue | @priref |
-| fiafcore:hasLanguageUsage |  |
-| fiafcore:hasLanguageUsage/fiafcore:hasLanguage |  |
-| fiafcore:hasManifestation | parts_reference.lref |
-| fiafcore:hasSubject | Content_subject/content.subject/text |
-| fiafcore:hasTitle/rdf:type | Title/title.type/value/text |
-| fiafcore:hasTitle/fiafcore:hasTitleValue | Title/title/text |
-
-TODO example input/output here?
-
-*Template below*
-
-**Mapping: Work**
-
 A moving image Work comprises both the intellectual or artistic content and the process of realisation in a cinematographic medium.
 
 | fiaf | local |
 | -- | -- |
 | rdf:type |  |
-| fiaf:hasCountry |  |
+| fiaf:hasCountry | production_country |
 | fiaf:hasEvent |  |
 | fiaf:hasForm |  |
-| fiaf:hasGenre |  |
-| fiaf:hasIdentifier |  |
+| fiaf:hasGenre | Content_genre/content.genre |
+| fiaf:hasIdentifier | @priref |
 | fiaf:hasLanguageUsage |  |
-| fiaf:hasManifestation |  |
-| fiaf:hasSubject |  |
-| fiaf:hasTitle |  |
+| fiaf:hasManifestation | parts_reference.lref |
+| fiaf:hasSubject | Content_subject/content.subject |
+| fiaf:hasTitle | Title/title  |
 | fiaf:hasVariant |  |
 | fiaf:hasWork |  |
 
@@ -143,3 +123,8 @@ Agents, whether for works/variants, manifestations, or items in moving images, a
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasIdentifier |  |
+
+
+
+TODO example input/output here?
+

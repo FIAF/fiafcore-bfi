@@ -9,11 +9,15 @@ import uuid
 
 
 def harmonise(graph):
-    turtle_string = graph.serialize(format="longturtle")
+    turtle_string = graph.serialize(format="turtle")
 
-    turtle_string = turtle_string.replace(
-        "<bfi://ontology/work>", "<https://ontology.fiafcore.org/Work>"
-    )
+    for a,b in [
+        ("<bfi://ontology/work>", "<https://ontology.fiafcore.org/Work>"),
+        ("<bfi://ontology/identifier>", "<https://ontology.fiafcore.org/Identifier>"),
+        ("<bfi://ontology/agent>", "<https://ontology.fiafcore.org/Agent>"),
+        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),        
+    ]:
+        turtle_string = turtle_string.replace(a, b)
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
@@ -57,19 +61,20 @@ def transform(tier):
     xml_works = [x for x in xml_works.findall(".//record")]
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
-        # # last laugh filter.
 
-        # if 'Work' in tier:
-        #     if xml.find('.//priref').text != '150335572':
-        #         continue
+        # testing filter.
 
-        # if 'Manifestation' in tier:
-        #     if xml.find('.//priref').text != '152148202':
-        #         continue
+        if 'Work' in tier:
+            if xml.find('.//priref').text != '150335572':
+                continue
 
-        # if 'Item' in tier:
-        #     if xml.find('.//priref').text != '152744617':
-        #         continue
+        if 'Manifestation' in tier:
+            if xml.find('.//priref').text != '152148202':
+                continue
+
+        if 'Item' in tier:
+            if xml.find('.//priref').text != '152744617':
+                continue
 
         # transformation via xslt to fiafcore structures.
 
