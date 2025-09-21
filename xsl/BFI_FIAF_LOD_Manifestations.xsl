@@ -20,19 +20,31 @@
                 <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}">
                     <rdf:type rdf:resource="bfi://ontology/manifestation" />
 
+                    <!-- fiaf:hasColourCharacteristic -->
+
+                    <!-- fiaf:hasEvent -->
+
+                    <!-- fiaf:hasExtent -->
+
+                    <!-- fiaf:hasFormat -->
+
+                    <!-- fiaf:hasIdentifier -->
+
+                    <!-- fiaf:hasImageCharacteristic -->
+
                     <!-- fiaf:hasItem -->
 
                     <xsl:for-each select="Parts">
                         <fiaf:hasItem rdf:resource="bfi://resource/item/{parts_reference.lref}" />
                     </xsl:for-each>
-                    
-                    <!-- question, does this handle multiples? -->
 
-                    <!-- <xsl:variable name="country" select="translate(production_country, ' ', '_')" /> -->
-                    <!-- <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" /> -->
+                    <!-- fiaf:hasLanguageUsage -->
+
+                    <!-- fiaf:hasSoundCharacteristic -->
+
+                    <!-- fiaf:hasTitle -->
 
                 </rdf:Description>
-
             </xsl:for-each>
         </rdf:RDF>
     </xsl:template>

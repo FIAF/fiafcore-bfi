@@ -82,6 +82,7 @@ def transform(tier):
         transform = etree.XSLT(xsl_file)
         result = transform(xml)
         g = rdflib.Graph().parse(data=str(result), format="xml")
+        g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
 
         # harmonise vocabulary terms to fiafcore.
 
@@ -116,6 +117,7 @@ def main():
 
     g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
 
+    # print(g.serialize(format='turtle'))
 
 if __name__ == "__main__":
     main()

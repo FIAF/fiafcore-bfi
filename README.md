@@ -47,7 +47,7 @@ A moving image Manifestation is the embodiment of a moving image Work or Variant
 | fiaf:hasFormat |  |
 | fiaf:hasIdentifier |  |
 | fiaf:hasImageCharacteristic |  |
-| fiaf:hasItem |  |
+| fiaf:hasItem | parts_reference.lref |
 | fiaf:hasLanguageUsage |  |
 | fiaf:hasSoundCharacteristic |  |
 | fiaf:hasTitle |  |
@@ -59,28 +59,28 @@ A moving image Item is the physical or digital product of a Manifestation of a W
 | fiaf | local |
 | -- | -- |
 | rdf:type |  |
-| fiaf:hasBase |  |
+| fiaf:hasBase | bfi:base/value[@lang='0'] |
 | fiaf:hasBroadcastStandard |  |
 | fiaf:hasCarrier |  |
 | fiaf:hasColourCharacteristic |  |
-| fiaf:hasEvent |  |
+| fiaf:hasEvent | bfi:Dimension/dimension.value |
 | fiaf:hasExtent |  |
-| fiaf:hasFormat |  |
+| fiaf:hasFormat | bfi:gauge_film/value[@lang='0'] |
 | fiaf:hasFrameRate |  |
-| fiaf:hasHoldingInstitution |  |
-| fiaf:hasIdentifier |  |
+| fiaf:hasHoldingInstitution | "BFI" |
+| fiaf:hasIdentifier | @priref |
 | fiaf:hasImageCharacteristic |  |
 | fiaf:hasLineStandard |  |
 | fiaf:hasResolution |  |
-| fiaf:hasSoundCharacteristic |  |
+| fiaf:hasSoundCharacteristic | bfi:sound_item/value[@lang='0'] |
 | fiaf:hasSourceDevice |  |
 | fiaf:hasSourceSoftware |  |
-| fiaf:hasStatus |  |
+| fiaf:hasStatus | bfi:copy_status/value[@lang='0'] |
 | fiaf:hasStock |  |
 | fiaf:hasStream |  |
 | fiaf:hasTitle |  |
 | fiaf:hasTransferSpeed |  |
-| fiaf:isElement |  |
+| fiaf:isElement | bfi:physical_description |
 
 **Mapping: Carrier**
 

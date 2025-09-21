@@ -16,18 +16,18 @@
             <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/work/{@priref}">
 
-                    <!-- fiafcore:Work -->
+                    <!-- fiaf:Work -->
 
                     <rdf:type rdf:resource="bfi://ontology/work" />
 
-                    <!-- fiafcore:hasCountry -->
+                    <!-- fiaf:hasCountry -->
 
                     <xsl:for-each select="production_country">
                         <xsl:variable name="country" select="translate(., ' ', '_')" />
                         <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
                     </xsl:for-each>
 
-                    <!-- fiafcore:hasEvent -->
+                    <!-- fiaf:hasEvent -->
 
                     <!-- TODO add credits under a production event -->
 
@@ -41,16 +41,16 @@
                     <!-- </title_date.type> -->
                     <!-- </Title_date> -->
 
-                    <!-- fiafcore:hasForm -->
+                    <!-- fiaf:hasForm -->
 
-                    <!-- fiafcore:hasGenre -->
+                    <!-- fiaf:hasGenre -->
 
                     <xsl:for-each select="Content_genre/content.genre">
                         <xsl:variable name="genre" select="translate(., ' ', '_')" />
                         <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre}" />
                     </xsl:for-each>
 
-                    <!-- fiafcore:hasIdentifier -->
+                    <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
@@ -62,15 +62,15 @@
                         </rdf:Description>
                     </fiaf:hasIdentifier>
 
-                    <!-- fiafcore:hasLanguageUsage -->
+                    <!-- fiaf:hasLanguageUsage -->
 
-                    <!-- fiafcore:hasManifestation -->
+                    <!-- fiaf:hasManifestation -->
 
                     <xsl:for-each select="Parts">
                         <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" />
                     </xsl:for-each>
 
-                    <!-- fiafcore:hasSubject -->
+                    <!-- fiaf:hasSubject -->
 
                     <xsl:for-each select="Content_subject/content.subject">
                         <xsl:variable name="subject1" select="translate(., ' ', '_')" />
@@ -78,7 +78,7 @@
                         <fiaf:hasSubject rdf:resource="bfi://vocabulary/subject/{$subject2}" />
                     </xsl:for-each>
 
-                    <!-- fiafcore:hasTitle -->
+                    <!-- fiaf:hasTitle -->
 
                     <xsl:for-each select="Title">
                         <fiaf:hasTitle>
@@ -91,9 +91,9 @@
                         </fiaf:hasTitle>
                     </xsl:for-each>
 
-                    <!-- fiafcore:hasVariant -->
+                    <!-- fiaf:hasVariant -->
 
-                    <!-- fiafcore:hasWork -->
+                    <!-- fiaf:hasWork -->
 
                 </rdf:Description>
 
