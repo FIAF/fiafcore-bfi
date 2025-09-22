@@ -83,7 +83,8 @@
                     <xsl:for-each select="Title">
                         <fiaf:hasTitle>
                             <rdf:Description>
-                                <rdf:type rdf:resource="bfi://ontology/title/{title.type/value}" />
+                                <xsl:variable name="title_type" select="translate(title.type/value[@lang='0'], ' ', '_')" />
+                                <rdf:type rdf:resource="bfi://ontology/title/{$title_type}" />
                                 <fiaf:hasTitleValue>
                                     <xsl:value-of select="concat(title.article, ' ', title)" />
                                 </fiaf:hasTitleValue>

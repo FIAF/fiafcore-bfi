@@ -62,19 +62,19 @@ def transform(tier):
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
 
-        # testing filter.
+        # # testing filter.
 
-        if 'Work' in tier:
-            if xml.find('.//priref').text != '150335572':
-                continue
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150335572':
+        #         continue
 
-        if 'Manifestation' in tier:
-            if xml.find('.//priref').text != '152148202':
-                continue
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '152148202':
+        #         continue
 
-        if 'Item' in tier:
-            if xml.find('.//priref').text != '152744617':
-                continue
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '152744617':
+        #         continue
 
         # transformation via xslt to fiafcore structures.
 

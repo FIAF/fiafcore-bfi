@@ -40,16 +40,16 @@ A moving image Manifestation is the embodiment of a moving image Work or Variant
 
 | fiaf | local |
 | -- | -- |
-| rdf:type |  |
-| fiaf:hasColourCharacteristic |  |
+| rdf:type | manifestationlevel_type/value[@lang='0'] |
+| fiaf:hasColourCharacteristic | colour_manifestation/value[@lang='0'] |
 | fiaf:hasEvent |  |
 | fiaf:hasExtent |  |
-| fiaf:hasFormat |  |
-| fiaf:hasIdentifier |  |
+| fiaf:hasFormat | format_low_level |
+| fiaf:hasIdentifier | @priref |
 | fiaf:hasImageCharacteristic |  |
 | fiaf:hasItem | parts_reference.lref |
-| fiaf:hasLanguageUsage |  |
-| fiaf:hasSoundCharacteristic |  |
+| fiaf:hasLanguageUsage | language/language.type/value[@lang='0'] |
+| fiaf:hasSoundCharacteristic | sound_manifestation/value[@lang='0'] |
 | fiaf:hasTitle |  |
 
 **Mapping: Item**
@@ -59,28 +59,28 @@ A moving image Item is the physical or digital product of a Manifestation of a W
 | fiaf | local |
 | -- | -- |
 | rdf:type |  |
-| fiaf:hasBase | bfi:base/value[@lang='0'] |
+| fiaf:hasBase | base/value[@lang='0'] |
 | fiaf:hasBroadcastStandard |  |
 | fiaf:hasCarrier |  |
 | fiaf:hasColourCharacteristic |  |
-| fiaf:hasEvent | bfi:Dimension/dimension.value |
+| fiaf:hasEvent | Dimension/dimension.value |
 | fiaf:hasExtent |  |
-| fiaf:hasFormat | bfi:gauge_film/value[@lang='0'] |
+| fiaf:hasFormat | gauge_film/value[@lang='0'] |
 | fiaf:hasFrameRate |  |
 | fiaf:hasHoldingInstitution | "BFI" |
 | fiaf:hasIdentifier | @priref |
 | fiaf:hasImageCharacteristic |  |
 | fiaf:hasLineStandard |  |
 | fiaf:hasResolution |  |
-| fiaf:hasSoundCharacteristic | bfi:sound_item/value[@lang='0'] |
+| fiaf:hasSoundCharacteristic | sound_item/value[@lang='0'] |
 | fiaf:hasSourceDevice |  |
 | fiaf:hasSourceSoftware |  |
-| fiaf:hasStatus | bfi:copy_status/value[@lang='0'] |
-| fiaf:hasStock |  |
+| fiaf:hasStatus | copy_status/value[@lang='0'] |
+| fiaf:hasStock | stock/stock_film |
 | fiaf:hasStream |  |
 | fiaf:hasTitle |  |
 | fiaf:hasTransferSpeed |  |
-| fiaf:isElement | bfi:physical_description |
+| fiaf:isElement | physical_description |
 
 **Mapping: Carrier**
 

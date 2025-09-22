@@ -99,6 +99,11 @@
 
                     <!-- fiaf:hasStock -->
 
+                    <xsl:for-each select="stock/stock_film">
+                        <xsl:variable name="stock" select="translate(., ' ', '')" />
+                        <fiaf:hasStock rdf:resource="bfi://vocabulary/stock/{$stock}" />
+                    </xsl:for-each>
+
                     <!-- fiaf:hasStream -->
 
                     <!-- fiaf:hasTitle -->

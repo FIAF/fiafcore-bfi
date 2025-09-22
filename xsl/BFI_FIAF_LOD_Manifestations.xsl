@@ -18,9 +18,23 @@
         <rdf:RDF>
             <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}">
-                    <rdf:type rdf:resource="bfi://ontology/manifestation" />
+
+                    <xsl:choose>
+                        <xsl:when test="manifestationlevel_type/value[@lang='0']">
+                            <xsl:variable name="manifest_type" select="translate(manifestationlevel_type/value[@lang='0'], ' ', '')"/>
+                            <rdf:type rdf:resource="bfi://ontology/manifestation/{$manifest_type}" />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <rdf:type rdf:resource="bfi://ontology/manifestation" />
+                        </xsl:otherwise>
+                    </xsl:choose>
 
                     <!-- fiaf:hasColourCharacteristic -->
+
+                    <xsl:for-each select="colour_manifestation/value[@lang='0']">
+                        <xsl:variable name="colour_manifestation" select="translate(., ' ', '')"/>
+                        <fiaf:hasColourCharacteristic rdf:resource="bfi://vocabulary/colourcharacteristic/{$colour_manifestation}"/>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasEvent -->
 
@@ -28,7 +42,23 @@
 
                     <!-- fiaf:hasFormat -->
 
+                    <!-- issue with double quotes in 2" videotape-->
+                    <!-- <xsl:for-each select="format_low_level"> -->
+                    <!-- <xsl:variable name="format" select="translate(., ' ', '')" /> -->
+                    <!-- <fiaf:hasFormat rdf:resource="bfi://vocabulary/format/{$format}" /> -->
+                    <!-- </xsl:for-each> -->
+
                     <!-- fiaf:hasIdentifier -->
+
+                    <fiaf:hasIdentifier>
+                        <rdf:Description rdf:about="bfi://identifier/manifestation/{@priref}">
+                            <rdf:type rdf:resource="bfi://ontology/identifier" />
+                            <fiaf:hasIdentifierValue>
+                                <xsl:value-of select="@priref" />
+                            </fiaf:hasIdentifierValue>
+                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi" />
+                        </rdf:Description>
+                    </fiaf:hasIdentifier>
 
                     <!-- fiaf:hasImageCharacteristic -->
 
@@ -40,7 +70,23 @@
 
                     <!-- fiaf:hasLanguageUsage -->
 
+                    <xsl:for-each select="language">
+                        <xsl:variable name="languageusage" select="translate(./language.type/value[@lang='0'], ' ', '')"/>
+                        <fiaf:hasLanguageUsage>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="bfi://ontology/languageusage/{$languageusage}" />
+                                <xsl:variable name="language" select="translate(language, ' ', '')"/>
+                                <fiaf:hasLanguage rdf:resource="bfi://vocabulary/language/{$language}"/>
+                            </rdf:Description>
+                        </fiaf:hasLanguageUsage>
+                    </xsl:for-each>
+
                     <!-- fiaf:hasSoundCharacteristic -->
+
+                    <xsl:for-each select="sound_manifestation/value[@lang='0']">
+                        <xsl:variable name="sound_manifestation" select="translate(., ' ', '')"/>
+                        <fiaf:hasSoundCharacteristic rdf:resource="bfi://vocabulary/soundcharacteristic/{$sound_manifestation}"/>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasTitle -->
 
