@@ -6,7 +6,7 @@ Conformation of BFI data to FIAFcore.
 
 A moving image Work comprises both the intellectual or artistic content and the process of realisation in a cinematographic medium.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasCountry | production_country |
@@ -25,7 +25,7 @@ A moving image Work comprises both the intellectual or artistic content and the 
 
 A moving image Variant is an entity that may be used to indicate any change to content-related characteristics that do not significantly change the overall content of a Work as a whole.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasEvent |  |
@@ -38,7 +38,7 @@ A moving image Variant is an entity that may be used to indicate any change to c
 
 A moving image Manifestation is the embodiment of a moving image Work or Variant. Manifestations usually include all analogue, digital and online media associated with a particular embodiment of a Work or Variant.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type | manifestationlevel_type/value[@lang='0'] |
 | fiaf:hasColourCharacteristic | colour_manifestation/value[@lang='0'] |
@@ -56,7 +56,7 @@ A moving image Manifestation is the embodiment of a moving image Work or Variant
 
 A moving image Item is the physical or digital product of a Manifestation of a Work or Variant, i.e. the actual copy of a Work or Variant. Whereas the Manifestation record describes the “ideal” of a particular format or publication, the Item record represents the actual holding in a repository's collection.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasBase | base/value[@lang='0'] |
@@ -86,7 +86,7 @@ A moving image Item is the physical or digital product of a Manifestation of a W
 
 A moving image Carrier is the discrete physical unit on which the moving image is retained. It can either contain the entire artistic work or a portion, for example in the case of individual film reels.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasEvent |  |
@@ -96,7 +96,7 @@ A moving image Carrier is the discrete physical unit on which the moving image i
 
 An Event characterises occurrences in the lifecycle of a moving image Work, Variant, Manifestation or Item. Instances of any Event can have Activity (and Agent) relationships.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasAchievement |  |
@@ -110,7 +110,7 @@ An Event characterises occurrences in the lifecycle of a moving image Work, Vari
 
 This describes the activity or role of the Agent in relation to the moving image Work/Variant, or to make explicit the relationship(s) between the Agent and the Manifestation or Item.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasAgent |  |
@@ -119,7 +119,7 @@ This describes the activity or role of the Agent in relation to the moving image
 
 Agents, whether for works/variants, manifestations, or items in moving images, are entities involved in their creation, exploitation, or preservation, with typical distinctions including person, corporate body, family, and person group, encompassing responsibilities such as release, distribution, acquisition, or preservation.
 
-| fiaf | local |
+| fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasIdentifier |  |
