@@ -62,27 +62,28 @@ def transform(tier):
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
 
-        # testing filter.
+        # # testing filter.
 
-        if 'Work' in tier:
-            if xml.find('.//priref').text != '150335572':
-                continue
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150335572':
+        #         continue
 
-        if 'Manifestation' in tier:
-            if xml.find('.//priref').text != '152148202':
-                continue
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '152100981':
+        #         continue
 
-        if 'Item' in tier:
-            if xml.find('.//priref').text != '152744617':
-                continue
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '152772493':
+        #         continue
 
         # transformation via xslt to fiafcore structures.
 
         xsl_file = etree.parse(str(pathlib.Path.cwd() / "xsl" / f"{tier}.xsl"))
         transform = etree.XSLT(xsl_file)
         result = transform(xml)
-        g = rdflib.Graph().parse(data=str(result), format="xml")
+        g = rdflib.Graph()
         g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
+        g = g.parse(data=str(result), format="xml")
 
         # harmonise vocabulary terms to fiafcore.
 
