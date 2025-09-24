@@ -10,7 +10,7 @@ A moving image Work comprises both the intellectual or artistic content and the 
 | -- | -- |
 | rdf:type |  |
 | fiaf:hasCountry | production_country |
-| fiaf:hasEvent |  |
+| fiaf:hasEvent (production) | cast, credits |
 | fiaf:hasForm |  |
 | fiaf:hasGenre | Content_genre/content.genre |
 | fiaf:hasIdentifier | @priref |

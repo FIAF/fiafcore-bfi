@@ -28,18 +28,60 @@
                     </xsl:for-each>
 
                     <!-- fiaf:hasEvent -->
-
-                    <!-- TODO add credits under a production event -->
-
-                    <!-- TODO also see release date below -->
-
-                    <!-- <Title_date> -->
-                    <!-- <title_date_start tag="w1" occ="1">1924</title_date_start> -->
-                    <!-- <title_date.type tag="w5" occ="1"> -->
-                    <!-- <value lang="neutral">03_R</value> -->
-                    <!-- <value lang="0">Release</value> -->
-                    <!-- </title_date.type> -->
-                    <!-- </Title_date> -->
+                    
+                    <fiaf:hasEvent>
+                        <rdf:Description>
+                            <rdf:type rdf:resource="bfi://ontology/event/production_event"/>
+                            <xsl:for-each select="credits">
+                                <fiaf:hasActivity>
+                                    <rdf:Description>
+                                        <xsl:variable name="activity" select="translate(credit.type, ' ', '')"/>
+                                        <rdf:type rdf:resource="bfi://ontology/activity/{$activity}"/>
+                                        <fiaf:hasAgent>
+                                            <rdf:Description rdf:about="bfi://resource/agent/{credit.name.lref}">
+                                                <rdfs:label>
+                                                    <xsl:value-of select="credit.name"/>
+                                                </rdfs:label>
+                                                <fiaf:hasIdentifier>
+                                                    <rdf:Description rdf:about="bfi://identifier/agent/{credit.name.lref}">
+                                                        <rdf:type rdf:resource="bfi://ontology/identifier"/>
+                                                        <fiaf:hasIdentifierValue>
+                                                            <xsl:value-of select="credit.name.lref"/>
+                                                        </fiaf:hasIdentifierValue>
+                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                                                    </rdf:Description>
+                                                </fiaf:hasIdentifier>
+                                            </rdf:Description>
+                                        </fiaf:hasAgent>
+                                    </rdf:Description>
+                                </fiaf:hasActivity>
+                            </xsl:for-each>
+                            <xsl:for-each select="cast">
+                                <fiaf:hasActivity>
+                                    <rdf:Description>
+                                        <xsl:variable name="activity" select="translate(cast.credit_type, ' ', '')"/>
+                                        <rdf:type rdf:resource="bfi://ontology/activity/{$activity}"/>
+                                        <fiaf:hasAgent>
+                                            <rdf:Description rdf:about="bfi://resource/agent/{cast.name.lref}">
+                                                <rdfs:label>
+                                                    <xsl:value-of select="cast.name"/>
+                                                </rdfs:label>
+                                                <fiaf:hasIdentifier>
+                                                    <rdf:Description rdf:about="bfi://identifier/agent/{cast.name.lref}">
+                                                        <rdf:type rdf:resource="bfi://ontology/identifier"/>
+                                                        <fiaf:hasIdentifierValue>
+                                                            <xsl:value-of select="cast.name.lref"/>
+                                                        </fiaf:hasIdentifierValue>
+                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                                                    </rdf:Description>
+                                                </fiaf:hasIdentifier>
+                                            </rdf:Description>
+                                        </fiaf:hasAgent>
+                                    </rdf:Description>
+                                </fiaf:hasActivity>
+                            </xsl:for-each>
+                        </rdf:Description>
+                    </fiaf:hasEvent>
 
                     <!-- fiaf:hasForm -->
 
