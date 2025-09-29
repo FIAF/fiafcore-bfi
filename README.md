@@ -124,7 +124,3 @@ Agents, whether for works/variants, manifestations, or items in moving images, a
 | rdf:type |  |
 | fiaf:hasIdentifier |  |
 
-
-
-TODO example input/output here?
-
