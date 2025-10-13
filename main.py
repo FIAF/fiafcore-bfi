@@ -1,8 +1,6 @@
 from lxml import etree
-import dotenv
-import os
+import pandas
 import pathlib
-import pymongo
 import rdflib
 import tqdm
 import uuid
@@ -15,46 +13,42 @@ def harmonise(graph):
         ("<bfi://ontology/work>", "<https://ontology.fiafcore.org/Work>"),
         ("<bfi://ontology/identifier>", "<https://ontology.fiafcore.org/Identifier>"),
         ("<bfi://ontology/agent>", "<https://ontology.fiafcore.org/Agent>"),
-        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),        
+        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),  
+        ("<bfi://ontology/item>", "<https://ontology.fiafcore.org/Item>")      
     ]:
         turtle_string = turtle_string.replace(a, b)
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
 
-def authority(graph):
-    work_type = rdflib.URIRef("https://ontology.fiafcore.org/Work")
-    work_ids = [str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, work_type))]
-
-    atlas_user, atlas_pass = os.getenv("ATLAS_USER"), os.getenv("ATLAS_PASS")
-    uri = f"mongodb+srv://{atlas_user}:{atlas_pass}@fiafcore.wrscui9.mongodb.net/?retryWrites=true&w=majority&appName=fiafcore"
-    client = pymongo.MongoClient(uri)
-    database = client.get_database("fiafcore")
-    coll = database.get_collection("auth")
+def authority(graph, df):
+    local_ids = list()
+    for entity_type in ["Work", "Manifestation", "Item", "Carrier", "Agent"]:
+        type_uri = rdflib.URIRef(f"https://ontology.fiafcore.org/{entity_type}")
+        local_ids += [
+            str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, type_uri))
+        ]
 
     authority = dict()
-    for x in tqdm.tqdm(work_ids):
-        match = list(coll.find({"local": {"$elemMatch": {"$eq": x}}}))
-
+    for x in local_ids:
+        match = df.loc[df.local.isin([str(x)])]
         if len(match) > 1:
             raise Exception("This should not happen.")
         elif len(match) < 1:
             minted_id = f"https://resource.fiafcore.org/{str(uuid.uuid4())}"
-            coll.insert_one({"fiafcore": minted_id, "local": [x]})
             authority[x] = minted_id
+            df.loc[len(df)] = [(minted_id), (x)]
         else:
-            authority[x] = match[0]["fiafcore"]
+            authority[x] = match.iloc[0]["local"]
 
-    client.close()
-
-    turtle_string = graph.serialize(format="longturtle")
+    turtle_string = graph.serialize(format="turtle")
     for k, v in authority.items():
         turtle_string = turtle_string.replace(f"<{k}>", f"<{v}>")
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
 
-def transform(tier):
+def transform(tier, df):
     graph = rdflib.Graph()
 
     xml_works = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
@@ -62,7 +56,7 @@ def transform(tier):
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
 
-        # # testing filter.
+        # # # testing filter.
 
         # if 'Work' in tier:
         #     if xml.find('.//priref').text != '150335572':
@@ -81,9 +75,7 @@ def transform(tier):
         xsl_file = etree.parse(str(pathlib.Path.cwd() / "xsl" / f"{tier}.xsl"))
         transform = etree.XSLT(xsl_file)
         result = transform(xml)
-        g = rdflib.Graph()
-        g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
-        g = g.parse(data=str(result), format="xml")
+        g = rdflib.Graph().parse(data=str(result), format="xml")
 
         # harmonise vocabulary terms to fiafcore.
 
@@ -91,7 +83,7 @@ def transform(tier):
 
         # fiafcore authority ids for entities.
 
-        # g = authority(g)
+        g = authority(g, df)
 
         # collect output into main graph.
 
@@ -101,24 +93,35 @@ def transform(tier):
 
 
 def main():
-    # load variables.
 
-    dotenv.load_dotenv()
+    auth_path = pathlib.Path.cwd() / "auth.parquet"
+    if not auth_path.exists():
+        auth_df = pandas.DataFrame(columns=["fiafcore", "local"])
+    else:
+        auth_df = pandas.read_parquet(auth_path)
+
 
     # transform data.
 
     g = rdflib.Graph()
-    g += transform("BFI_FIAF_LOD_Works")
-    g += transform("BFI_FIAF_LOD_Manifestations")
-    g += transform("BFI_FIAF_LOD_Items")
+    g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
+
+    g += transform("BFI_FIAF_LOD_Works", auth_df)
+    g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
+    g += transform("BFI_FIAF_LOD_Items", auth_df)
 
     # write resulting rdf.
 
     print(len(g))
 
+    # save authority parquet.
+
+    auth_df.to_parquet(auth_path)
+
+    # save graph.
+
     g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
 
-    # print(g.serialize(format='turtle'))
 
 if __name__ == "__main__":
     main()
