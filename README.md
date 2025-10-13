@@ -2,6 +2,14 @@
 
 Conformation of BFI data to FIAFcore.
 
+**Deployment**
+
+This transformation has been built using [Python](https://www.python.org/), with [uv](https://docs.astral.sh/uv/) as dependancy manager. Once relevant XML data has been placed into an `xml` subdirectory, the transformation can be executed with the following command:
+
+```sh
+uv run main.py
+```
+
 **Mapping: Work**
 
 A moving image Work comprises both the intellectual or artistic content and the process of realisation in a cinematographic medium.
@@ -124,3 +132,6 @@ Agents, whether for works/variants, manifestations, or items in moving images, a
 | rdf:type |  |
 | fiaf:hasIdentifier |  |
 
+**License**
+
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)

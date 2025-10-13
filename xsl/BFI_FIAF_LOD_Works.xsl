@@ -39,6 +39,7 @@
                                         <rdf:type rdf:resource="bfi://ontology/activity/{$activity}"/>
                                         <fiaf:hasAgent>
                                             <rdf:Description rdf:about="bfi://resource/agent/{credit.name.lref}">
+                                                <rdf:type rdf:resource="bfi://ontology/agent"/>
                                                 <rdfs:label>
                                                     <xsl:value-of select="credit.name"/>
                                                 </rdfs:label>
@@ -63,6 +64,7 @@
                                         <rdf:type rdf:resource="bfi://ontology/activity/{$activity}"/>
                                         <fiaf:hasAgent>
                                             <rdf:Description rdf:about="bfi://resource/agent/{cast.name.lref}">
+                                                <rdf:type rdf:resource="bfi://ontology/agent"/>
                                                 <rdfs:label>
                                                     <xsl:value-of select="cast.name"/>
                                                 </rdfs:label>
