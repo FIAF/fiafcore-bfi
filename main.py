@@ -39,7 +39,7 @@ def authority(graph, df):
             authority[x] = minted_id
             df.loc[len(df)] = [(minted_id), (x)]
         else:
-            authority[x] = match.iloc[0]["local"]
+            authority[x] = match.iloc[0]["fiafcore"]
 
     turtle_string = graph.serialize(format="turtle")
     for k, v in authority.items():
@@ -56,19 +56,19 @@ def transform(tier, df):
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
 
-        # # # testing filter.
+        # # testing filter.
 
-        # if 'Work' in tier:
-        #     if xml.find('.//priref').text != '150335572':
-        #         continue
+        if 'Work' in tier:
+            if xml.find('.//priref').text != '150335572':
+                continue
 
-        # if 'Manifestation' in tier:
-        #     if xml.find('.//priref').text != '152100981':
-        #         continue
+        if 'Manifestation' in tier:
+            if xml.find('.//priref').text != '152100981':
+                continue
 
-        # if 'Item' in tier:
-        #     if xml.find('.//priref').text != '152772493':
-        #         continue
+        if 'Item' in tier:
+            if xml.find('.//priref').text != '152772493':
+                continue
 
         # transformation via xslt to fiafcore structures.
 
