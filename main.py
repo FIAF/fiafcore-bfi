@@ -18,6 +18,19 @@ def harmonise(graph):
     ]:
         turtle_string = turtle_string.replace(a, b)
 
+    # base vocabulary.
+
+    for a,b in [
+        ("<bfi://vocabulary/base/Safety>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
+        ("<bfi://vocabulary/base/Video>", "<https://vocabulary.fiafcore.org/base/Polyester>"),
+        ("<bfi://vocabulary/base/Nitrate>", "<https://vocabulary.fiafcore.org/base/Nitrate>"),
+        ("<bfi://vocabulary/base/CTA>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
+        ("<bfi://vocabulary/base/Polyester>", "<https://vocabulary.fiafcore.org/base/Polyester>"),
+        ("<bfi://vocabulary/base/Acetate>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
+        ("<bfi://vocabulary/base/Mainlysafety>", "<https://vocabulary.fiafcore.org/base/Acetate>")
+    ]:
+        turtle_string = turtle_string.replace(a, b)
+
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
 
@@ -58,17 +71,17 @@ def transform(tier, df):
 
         # # testing filter.
 
-        if 'Work' in tier:
-            if xml.find('.//priref').text != '150335572':
-                continue
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150335572':
+        #         continue
 
-        if 'Manifestation' in tier:
-            if xml.find('.//priref').text != '152100981':
-                continue
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '152100981':
+        #         continue
 
-        if 'Item' in tier:
-            if xml.find('.//priref').text != '152772493':
-                continue
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '152772493':
+        #         continue
 
         # transformation via xslt to fiafcore structures.
 
@@ -106,8 +119,8 @@ def main():
     g = rdflib.Graph()
     g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
 
-    g += transform("BFI_FIAF_LOD_Works", auth_df)
-    g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
+    # g += transform("BFI_FIAF_LOD_Works", auth_df)
+    # g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
     g += transform("BFI_FIAF_LOD_Items", auth_df)
 
     # write resulting rdf.
