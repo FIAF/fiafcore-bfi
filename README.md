@@ -16,7 +16,7 @@ A moving image Work comprises both the intellectual or artistic content and the 
 
 | fiaf | bfi |
 | -- | -- |
-| rdf:type |  |
+| rdf:type | work_type |
 | fiaf:hasCountry | production_country |
 | fiaf:hasEvent (production) | cast, credits |
 | fiaf:hasForm |  |
@@ -27,7 +27,7 @@ A moving image Work comprises both the intellectual or artistic content and the 
 | fiaf:hasSubject | Content_subject/content.subject |
 | fiaf:hasTitle | Title/title  |
 | fiaf:hasVariant |  |
-| fiaf:hasWork |  |
+| fiaf:hasWork | parts_reference.lref |
 
 **Mapping: Variant**
 
@@ -66,11 +66,11 @@ A moving image Item is the physical or digital product of a Manifestation of a W
 
 | fiaf | bfi |
 | -- | -- |
-| rdf:type |  |
+| rdf:type | item_type  |
 | fiaf:hasBase | base/value[@lang='0'] |
 | fiaf:hasBroadcastStandard |  |
 | fiaf:hasCarrier |  |
-| fiaf:hasColourCharacteristic |  |
+| fiaf:hasColourCharacteristic | colour_bw  |
 | fiaf:hasEvent | Dimension/dimension.value |
 | fiaf:hasExtent |  |
 | fiaf:hasFormat | gauge_film/value[@lang='0'] |
@@ -78,16 +78,16 @@ A moving image Item is the physical or digital product of a Manifestation of a W
 | fiaf:hasHoldingInstitution | "BFI" |
 | fiaf:hasIdentifier | @priref |
 | fiaf:hasImageCharacteristic |  |
-| fiaf:hasLineStandard |  |
+| fiaf:hasLineStandard | line_standard_video  |
 | fiaf:hasResolution |  |
 | fiaf:hasSoundCharacteristic | sound_item/value[@lang='0'] |
-| fiaf:hasSourceDevice |  |
+| fiaf:hasSourceDevice | source_device |
 | fiaf:hasSourceSoftware |  |
 | fiaf:hasStatus | copy_status/value[@lang='0'] |
 | fiaf:hasStock | stock/stock_film |
 | fiaf:hasStream |  |
 | fiaf:hasTitle |  |
-| fiaf:hasTransferSpeed |  |
+| fiaf:hasTransferSpeed | transfer_speed |
 | fiaf:isElement | physical_description |
 
 **Mapping: Carrier**
@@ -130,7 +130,7 @@ Agents, whether for works/variants, manifestations, or items in moving images, a
 | fiaf | bfi |
 | -- | -- |
 | rdf:type |  |
-| fiaf:hasIdentifier |  |
+| fiaf:hasIdentifier | @priref |
 
 **License**
 
