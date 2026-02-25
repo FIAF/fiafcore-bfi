@@ -13,8 +13,8 @@ def harmonise(graph):
         ("<bfi://ontology/work>", "<https://ontology.fiafcore.org/Work>"),
         ("<bfi://ontology/identifier>", "<https://ontology.fiafcore.org/Identifier>"),
         ("<bfi://ontology/agent>", "<https://ontology.fiafcore.org/Agent>"),
-        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),  
-        ("<bfi://ontology/item>", "<https://ontology.fiafcore.org/Item>")      
+        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),
+        ("<bfi://ontology/item>", "<https://ontology.fiafcore.org/Item>")
     ]:
         turtle_string = turtle_string.replace(a, b)
 
@@ -69,19 +69,19 @@ def transform(tier, df):
     print(len(xml_works))
     for xml in tqdm.tqdm(xml_works, desc=tier):
 
-        # # testing filter.
+        # testing filter.
 
-        # if 'Work' in tier:
-        #     if xml.find('.//priref').text != '150335572':
-        #         continue
+        if 'Work' in tier:
+            if xml.find('.//priref').text != '150335572':
+                continue
 
-        # if 'Manifestation' in tier:
-        #     if xml.find('.//priref').text != '152100981':
-        #         continue
+        if 'Manifestation' in tier:
+            if xml.find('.//priref').text != '152100981':
+                continue
 
-        # if 'Item' in tier:
-        #     if xml.find('.//priref').text != '152772493':
-        #         continue
+        if 'Item' in tier:
+            if xml.find('.//priref').text != '152772493':
+                continue
 
         # transformation via xslt to fiafcore structures.
 
@@ -119,8 +119,8 @@ def main():
     g = rdflib.Graph()
     g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
 
-    # g += transform("BFI_FIAF_LOD_Works", auth_df)
-    # g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
+    g += transform("BFI_FIAF_LOD_Works", auth_df)
+    g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
     g += transform("BFI_FIAF_LOD_Items", auth_df)
 
     # write resulting rdf.
