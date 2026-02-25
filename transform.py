@@ -64,24 +64,23 @@ def authority(graph, df):
 def transform(tier, df):
     graph = rdflib.Graph()
 
-    xml_works = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
-    xml_works = [x for x in xml_works.findall(".//record")]
-    print(len(xml_works))
-    for xml in tqdm.tqdm(xml_works, desc=tier):
+    xml_items = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
+    xml_items = [x for x in xml_items.findall(".//record")]
+    for xml in tqdm.tqdm(xml_items, desc=tier):
 
-        # testing filter.
+        # # testing filter.
 
-        if 'Work' in tier:
-            if xml.find('.//priref').text != '150335572':
-                continue
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150335572':
+        #         continue
 
-        if 'Manifestation' in tier:
-            if xml.find('.//priref').text != '152100981':
-                continue
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '152100981':
+        #         continue
 
-        if 'Item' in tier:
-            if xml.find('.//priref').text != '152772493':
-                continue
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '152772493':
+        #         continue
 
         # transformation via xslt to fiafcore structures.
 
@@ -125,7 +124,7 @@ def main():
 
     # write resulting rdf.
 
-    print(len(g))
+    print(f'{len(g)} triples.')
 
     # save authority parquet.
 

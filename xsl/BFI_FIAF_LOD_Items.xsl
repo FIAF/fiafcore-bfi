@@ -17,12 +17,12 @@
     <xsl:template match="/">
         <rdf:RDF>
             <xsl:for-each select="record">
-                <rdf:Description rdf:about="bfi://resource/item/{@priref}">
-                    <rdf:type rdf:resource="bfi://ontology/item" />
+                <!-- <rdf:Description rdf:about="bfi://resource/item/{@priref}"> -->
+                    <!-- <rdf:type rdf:resource="bfi://ontology/item" /> -->
 
                     <!-- fiaf:hasBase -->
 
-                    <xsl:for-each select="base/value[@lang='0']">
+                    <!-- <xsl:for-each select="base/value[@lang='0']">
                         <xsl:variable name="base" select="translate(., ' ', '')" />
                         <xsl:choose>
                             <xsl:when test="$base = 'Acrylic'"/>
@@ -32,7 +32,7 @@
                                 <fiaf:hasBase rdf:resource="bfi://vocabulary/base/{$base}" />
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:for-each>
+                    </xsl:for-each> -->
 
                     <!-- fiaf:hasBroadcastStandard -->
 
@@ -122,7 +122,7 @@
                     <!-- <xsl:variable name="element" select="translate(physical_description, ' ', '_')" />
                     <fiaf:isElement rdf:resource="bfi://vocabulary/element/{$element}" /> -->
 
-                </rdf:Description>
+                <!-- </rdf:Description> -->
 
             </xsl:for-each>
         </rdf:RDF>
