@@ -95,10 +95,58 @@
 
                     <!-- fiaf:hasGenre -->
 
-                    <!-- <xsl:for-each select="Content_genre/content.genre">
-                        <xsl:variable name="genre" select="translate(., ' ', '_')" />
-                        <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre}" />
-                    </xsl:for-each> -->
+                    <xsl:for-each select="Content_genre/content.genre[normalize-space(.)]"> 
+                        <xsl:variable name="apos">'</xsl:variable>
+                        <xsl:variable name="genre1" select="translate(., ' ', '_')" />
+                        <xsl:variable name="genre2" select="translate($genre1, $apos, '')" />
+                        <xsl:choose>
+                            <xsl:when test="$genre2 = 'Film_noir'"/>
+                            <xsl:when test="$genre2 = 'Police_drama'"/>
+                            <xsl:when test="$genre2 = 'Artists_Moving_Image'"/>
+                            <xsl:when test="$genre2 = 'Anthology'"/>
+                            <xsl:when test="$genre2 = 'Swashbuckling'"/>
+                            <xsl:when test="$genre2 = 'Martial_arts'"/>
+                            <xsl:when test="$genre2 = 'Sex_comedy'"/>
+                            <xsl:when test="$genre2 = 'Road_movie'"/>
+                            <xsl:when test="$genre2 = 'Spaghetti_western'"/>
+                            <xsl:when test="$genre2 = 'Disaster'"/>
+                            <xsl:when test="$genre2 = 'Performance'"/>
+                            <xsl:when test="$genre2 = 'Fairy_tale'"/>
+                            <xsl:when test="$genre2 = 'Documentary'"/>
+                            <xsl:when test="$genre2 = 'Amateur_film'"/>
+                            <xsl:when test="$genre2 = 'School_programme_and_Educational_film'"/>
+                            <xsl:when test="$genre2 = 'Drama-documentary'"/>
+                            <xsl:when test="$genre2 = 'Documentary_drama'"/>
+                            <xsl:when test="$genre2 = 'Parody'"/>
+                            <xsl:when test="$genre2 = 'Blaxploitation'"/>
+                            <xsl:when test="$genre2 = 'Industry_sponsored_film'"/>
+                            <xsl:when test="$genre2 = 'Variety_show'"/>
+                            <xsl:when test="$genre2 = 'Promotional'"/>
+                            <xsl:when test="$genre2 = 'Pornography'"/>
+                            <xsl:when test="$genre2 = 'Student_film'"/>
+                            <xsl:when test="$genre2 = 'Farce'"/>
+                            <xsl:when test="$genre2 = 'Public_Information_Filler'"/>
+                            <xsl:when test="$genre2 = 'Home_movie'"/>
+                            <xsl:when test="$genre2 = 'Government_sponsored_film'"/>
+                            <xsl:when test="$genre2 = 'Film_serial'"/>
+                            <xsl:when test="$genre2 = 'Performance_music_video'"/>
+                            <xsl:when test="$genre2 = 'Training'"/>
+                            <xsl:when test="$genre2 = 'Advert'"/>
+                            <xsl:when test="$genre2 = 'Trick_film'"/>
+                            <xsl:when test="$genre2 = 'Sketch_show'"/>
+                            <xsl:when test="$genre2 = 'Adventure'"/>
+                            <xsl:when test="$genre2 = 'Music_video'"/>
+                            <xsl:when test="$genre2 = 'Puppet_(live-action)'"/>
+                            <xsl:when test="$genre2 = 'Australian_western'"/>
+                            <xsl:when test="$genre2 = 'Action_and_Adventure'">
+                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/Action" />
+                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/Adventure" />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre2}" />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each> 
 
                     <!-- fiaf:hasIdentifier -->
 

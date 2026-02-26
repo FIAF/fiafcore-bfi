@@ -37,6 +37,7 @@ def harmonise(graph):
 
     graph = conform(graph, 'ontology', 'rdf:type')
     graph = conform(graph, 'country', 'hasCountry')
+    graph = conform(graph, 'genre', 'hasGenre')
 
     return graph
 
