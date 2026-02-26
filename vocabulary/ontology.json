@@ -1,3 +1,4 @@
 {
-    "bfi://ontology/work": "https://ontology.fiafcore.org/Work"
+    "bfi://ontology/work": "https://ontology.fiafcore.org/Work",
+    "bfi://ontology/item": "https://ontology.fiafcore.org/Item"
 }
