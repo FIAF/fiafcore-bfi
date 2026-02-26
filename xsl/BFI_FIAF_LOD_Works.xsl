@@ -93,6 +93,8 @@
 
                     <!-- fiaf:hasForm -->
 
+                    <!-- Provided dataset may not contain this data. -->
+
                     <!-- fiaf:hasGenre -->
 
                     <xsl:for-each select="Content_genre/content.genre[normalize-space(.)]"> 
