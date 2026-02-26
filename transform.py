@@ -27,6 +27,10 @@ def conform(graph_in, vocabulary, prop):
 
     turtle_rdf = rdflib.Graph().parse(data=turtle_string, format="turtle")
     for s,p,o in turtle_rdf.triples((None, prop_uri, None)):
+
+        # you will want to add a caveat here, which is that if "o" is a blank node
+        # then return rdf:type of the blank node rather than "o" itself.
+
         if str(o) not in vocab.values():
             raise Exception('@@@', s, o)
 
@@ -38,6 +42,7 @@ def harmonise(graph):
     graph = conform(graph, 'ontology', 'rdf:type')
     graph = conform(graph, 'country', 'hasCountry')
     graph = conform(graph, 'genre', 'hasGenre')
+    graph = conform(graph, 'element', 'isElement')
 
     return graph
 

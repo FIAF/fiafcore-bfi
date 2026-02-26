@@ -1,0 +1,15 @@
+{
+    "bfi://vocabulary/element/BW_Positive": "https://vocabulary.fiafcore.org/element/ReleasePrint",
+    "bfi://vocabulary/element/Colour_Positive": "https://vocabulary.fiafcore.org/element/ReleasePrint",
+    "bfi://vocabulary/element/Dupe_Negative": "https://vocabulary.fiafcore.org/element/DuplicateNegative",
+    "bfi://vocabulary/element/Duplicating_Positive": "https://vocabulary.fiafcore.org/element/DuplicatePositive",
+    "bfi://vocabulary/element/Original_Negative": "https://vocabulary.fiafcore.org/element/OriginalNegative",
+    "bfi://vocabulary/element/Original_Colour_Negative": "https://vocabulary.fiafcore.org/element/OriginalNegative",
+    "bfi://vocabulary/element/Colour_Internegative": "https://vocabulary.fiafcore.org/element/DuplicateNegative",
+    "bfi://vocabulary/element/Colour_Negative": "https://vocabulary.fiafcore.org/element/DuplicateNegative",
+    "bfi://vocabulary/element/Colour_Interpositive": "https://vocabulary.fiafcore.org/element/DuplicatePositive",
+    "bfi://vocabulary/element/Duplicating_Lavender_Positive": "https://vocabulary.fiafcore.org/element/DuplicatePositive",
+    "bfi://vocabulary/element/Dupe_BW_negative": "https://vocabulary.fiafcore.org/element/DuplicateNegative",
+    "bfi://vocabulary/element/Dupe_Positive": "https://vocabulary.fiafcore.org/element/DuplicatePositive",
+    "bfi://vocabulary/element/Internegative": "https://vocabulary.fiafcore.org/element/DuplicateNegative"
+}
