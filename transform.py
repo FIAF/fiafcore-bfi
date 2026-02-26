@@ -1,4 +1,5 @@
 from lxml import etree
+import json
 import pandas
 import pathlib
 import rdflib
@@ -6,32 +7,38 @@ import tqdm
 import uuid
 
 
+def conform(graph_in, vocabulary, prop):
+
+    vocab_path = pathlib.Path.cwd() / 'vocabulary' / f'{vocabulary}.json'
+    if not vocab_path.exists():
+        raise Exception(f'{vocab_path} not found.')
+
+    with open(vocab_path) as vocab:
+        vocab = json.load(vocab)
+
+    turtle_string = graph_in.serialize(format="turtle")
+    for a,b in vocab.items():
+        turtle_string = turtle_string.replace(f'<{a}>', f'<{b}>')
+    
+    if prop == 'rdf:type':
+        prop_uri = rdflib.RDF.type
+    else:
+        prop_uri = rdflib.URIRef(f"https://ontology.fiafcore.org/{prop}")
+
+    turtle_rdf = rdflib.Graph().parse(data=turtle_string, format="turtle")
+    for s,p,o in turtle_rdf.triples((None, prop_uri, None)):
+        if str(o) not in vocab.values():
+            raise Exception('@@@', s, o)
+
+    return turtle_rdf
+
+
 def harmonise(graph):
-    turtle_string = graph.serialize(format="turtle")
 
-    for a,b in [
-        ("<bfi://ontology/work>", "<https://ontology.fiafcore.org/Work>"),
-        ("<bfi://ontology/identifier>", "<https://ontology.fiafcore.org/Identifier>"),
-        ("<bfi://ontology/agent>", "<https://ontology.fiafcore.org/Agent>"),
-        ("<bfi://ontology/manifestation>", "<https://ontology.fiafcore.org/Manifestation>"),
-        ("<bfi://ontology/item>", "<https://ontology.fiafcore.org/Item>")
-    ]:
-        turtle_string = turtle_string.replace(a, b)
+    graph = conform(graph, 'ontology', 'rdf:type')
+    graph = conform(graph, 'country', 'hasCountry')
 
-    # base vocabulary.
-
-    for a,b in [
-        ("<bfi://vocabulary/base/Safety>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
-        ("<bfi://vocabulary/base/Video>", "<https://vocabulary.fiafcore.org/base/Polyester>"),
-        ("<bfi://vocabulary/base/Nitrate>", "<https://vocabulary.fiafcore.org/base/Nitrate>"),
-        ("<bfi://vocabulary/base/CTA>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
-        ("<bfi://vocabulary/base/Polyester>", "<https://vocabulary.fiafcore.org/base/Polyester>"),
-        ("<bfi://vocabulary/base/Acetate>", "<https://vocabulary.fiafcore.org/base/Acetate>"),
-        ("<bfi://vocabulary/base/Mainlysafety>", "<https://vocabulary.fiafcore.org/base/Acetate>")
-    ]:
-        turtle_string = turtle_string.replace(a, b)
-
-    return rdflib.Graph().parse(data=turtle_string, format="turtle")
+    return graph
 
 
 def authority(graph, df):
@@ -112,27 +119,28 @@ def main():
     else:
         auth_df = pandas.read_parquet(auth_path)
 
-
-    # transform data.
+    # initiate a graph.
 
     g = rdflib.Graph()
     g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
+
+    # transform tier.
 
     g += transform("BFI_FIAF_LOD_Works", auth_df)
     g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
     g += transform("BFI_FIAF_LOD_Items", auth_df)
 
-    # write resulting rdf.
-
-    print(f'{len(g)} triples.')
-
-    # save authority parquet.
+    # update authority parquet.
 
     auth_df.to_parquet(auth_path)
 
     # save graph.
 
     g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
+    
+    # total triples.
+    
+    print(f'{len(g)} triples.')
 
 
 if __name__ == "__main__":

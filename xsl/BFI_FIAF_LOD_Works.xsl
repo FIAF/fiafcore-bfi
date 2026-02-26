@@ -14,18 +14,24 @@
     <xsl:template match="/">
         <rdf:RDF>
             <xsl:for-each select="record">
-                <!-- <rdf:Description rdf:about="bfi://resource/work/{@priref}"> -->
+                <rdf:Description rdf:about="bfi://resource/work/{@priref}">
 
                     <!-- fiaf:Work -->
 
-                    <!-- <rdf:type rdf:resource="bfi://ontology/work" /> -->
+                    <rdf:type rdf:resource="bfi://ontology/work" />
 
                     <!-- fiaf:hasCountry -->
 
-                    <!-- <xsl:for-each select="production_country">
+                    <xsl:for-each select="production_country[normalize-space(.)]"> 
                         <xsl:variable name="country" select="translate(., ' ', '_')" />
-                        <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
-                    </xsl:for-each> -->
+                        <xsl:choose>
+                            <xsl:when test="$country = 'USSR'"/>
+                            <xsl:when test="$country = 'Yugoslavia'"/>
+                            <xsl:otherwise>
+                                <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each> 
 
                     <!-- fiaf:hasEvent -->
                     
@@ -140,8 +146,7 @@
 
                     <!-- fiaf:hasWork -->
 
-                <!-- </rdf:Description> -->
-
+                </rdf:Description>
             </xsl:for-each>
         </rdf:RDF>
     </xsl:template>
