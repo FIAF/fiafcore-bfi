@@ -19,7 +19,7 @@ def conform(graph_in, vocabulary, prop):
     turtle_string = graph_in.serialize(format="turtle")
     for a,b in vocab.items():
         turtle_string = turtle_string.replace(f'<{a}>', f'<{b}>')
-    
+
     if prop == 'rdf:type':
         prop_uri = rdflib.RDF.type
     else:
@@ -27,9 +27,6 @@ def conform(graph_in, vocabulary, prop):
 
     turtle_rdf = rdflib.Graph().parse(data=turtle_string, format="turtle")
     for s,p,o in turtle_rdf.triples((None, prop_uri, None)):
-
-        # you will want to add a caveat here, which is that if "o" is a blank node
-        # then return rdf:type of the blank node rather than "o" itself.
 
         if str(o) not in vocab.values():
             raise Exception('@@@', s, o)
@@ -143,9 +140,9 @@ def main():
     # save graph.
 
     g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
-    
+
     # total triples.
-    
+
     print(f'{len(g)} triples.')
 
 
