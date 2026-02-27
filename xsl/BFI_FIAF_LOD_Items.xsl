@@ -61,8 +61,6 @@
                         <fiaf:hasFormat rdf:resource="bfi://vocabulary/filmformat/{$gauge_film}"/>
                     </xsl:for-each> -->
 
-                    <!-- fiaf:hasFrameRate -->
-
                     <!-- fiaf:hasHoldingInstitution -->
 
                     <!-- <fiaf:hasHoldingInstitution rdf:resource="bfi://ontology/holdinginstitution/bfi"/> -->
@@ -79,22 +77,12 @@
                         </rdf:Description>
                     </fiaf:hasIdentifier> -->
 
-                    <!-- fiaf:hasImageCharacteristic -->
-
-                    <!-- fiaf:hasLineStandard -->
-
-                    <!-- fiaf:hasResolution -->
-
                     <!-- fiaf:hasSoundCharacteristic -->
 
                     <!-- <xsl:for-each select="sound_item/value[@lang='0']">
                         <xsl:variable name="soundcharacteristic" select="translate(., ' ', '')" />
                         <fiaf:hasSoundCharacteristic rdf:resource="bfi://vocabulary/soundcharacteristic/{$soundcharacteristic}" />
                     </xsl:for-each> -->
-
-                    <!-- fiaf:hasSourceDevice -->
-
-                    <!-- fiaf:hasSourceSoftware -->
 
                     <!-- fiaf:hasStatus -->
 
@@ -105,36 +93,111 @@
 
                     <!-- fiaf:hasStock -->
 
-                    <!-- <xsl:for-each select="stock/stock_film">
-                        <xsl:variable name="stock" select="translate(., ' ', '')" />
-                        <fiaf:hasStock rdf:resource="bfi://vocabulary/stock/{$stock}" />
-                    </xsl:for-each> -->
-
-                    <!-- fiaf:hasStream -->
+                    <xsl:for-each select="stock/stock_film[normalize-space(.)]">
+                        <xsl:variable name="stock1" select="translate(., ' ', '_')" />
+                        <xsl:variable name="stock" select="translate($stock1, '&amp;', '')" />
+                        <xsl:choose>
+                            <xsl:when test="$stock = 'Unidentified-Eastern_European'"/>
+                            <xsl:when test="$stock = 'Kodak_Canada'"/>
+                            <xsl:when test="$stock = 'Unmarked'"/>
+                            <xsl:when test="$stock = 'Unidentified_manufacturer'"/>
+                            <xsl:when test="$stock = 'Eastmancolor'"/>
+                            <xsl:when test="$stock = 'Pathe_Cinema_France'"/>
+                            <xsl:when test="$stock = 'Selo'"/>
+                            <xsl:when test="$stock = 'Eastmancolor'"/>
+                            <xsl:when test="$stock = 'Unidentified-Russian'"/>
+                            <xsl:when test="$stock = 'Cbema'"/>
+                            <xsl:when test="$stock = 'Unidentified manufacturer'"/>
+                            <xsl:when test="$stock = 'SONY'"/>
+                            <xsl:when test="$stock = 'Ampex'"/>
+                            <xsl:when test="$stock = 'Pyral'"/>
+                            <xsl:when test="$stock = 'Maxell'"/>
+                            <xsl:when test="$stock = 'BASF'"/>
+                            <xsl:when test="$stock = 'MIXED'"/>
+                            <xsl:when test="$stock = 'unknown_credit_activity'"/>
+                            <xsl:when test="$stock = 'Zonal'"/>
+                            <xsl:when test="$stock = 'Deko'"/>
+                            <xsl:when test="$stock = 'Kodak_France'"/>
+                            <xsl:when test="$stock = 'Pathe_Cinema_France'"/>
+                            <xsl:when test="$stock = 'Technicolor'"/>
+                            <xsl:when test="$stock = '?'"/>
+                            <xsl:when test="$stock = 'Perutz'"/>
+                            <xsl:when test="$stock = 'Kodak_Canada'"/>
+                            <xsl:when test="$stock = 'FTON'"/>
+                            <xsl:when test="$stock = 'BLNX'"/>
+                            <xsl:when test="$stock = 'Unidentified-Eastern European'"/>
+                            <xsl:when test="$stock = 'Estar'"/>
+                            <xsl:when test="$stock = 'OBS'"/>
+                            <xsl:when test="$stock = 'Dupont_Pathe'"/>
+                            <xsl:when test="$stock = 'Kodak_AG_(German_Kodak)'"/>
+                            <xsl:when test="$stock = 'Goerz-Tenax'"/>
+                            <xsl:when test="$stock = 'Turkish'"/>
+                            <xsl:when test="$stock = 'Mafe'"/>
+                            <xsl:when test="$stock = 'Ansco'"/>
+                            <xsl:when test="$stock = 'Lignose'"/>
+                            <xsl:when test="$stock = 'D94L'"/>
+                            <xsl:when test="$stock = 'Unidentified-Indu'"/>
+                            <xsl:when test="$stock = 'DA8-113'"/>
+                            <xsl:when test="$stock = 'UNMARKED'"/>
+                            <xsl:when test="$stock = 'DVD-R'"/>
+                            <xsl:when test="$stock = 'SVMA'"/>
+                            <xsl:when test="$stock = 'DA8113'"/>
+                            <xsl:when test="$stock = 'TDK'"/>
+                            <xsl:when test="$stock = 'T_C_FOX'"/>
+                            <xsl:when test="$stock = 'T_AUET(USSR)'"/>
+                            <xsl:when test="$stock = 'VA_RCA_DUPLEX'"/>
+                            <xsl:when test="$stock = 'VUS'"/>
+                            <xsl:when test="$stock = 'Sakura'"/>
+                            <xsl:when test="$stock = 'Pathe_France'"/>
+                            <xsl:when test="$stock = 'E180'"/>
+                            <xsl:when test="$stock = 'E90'"/>
+                            <xsl:when test="$stock = 'IXD'"/>
+                            <xsl:when test="$stock = 'D124L'"/>
+                            <xsl:when test="$stock = 'Indu'"/>
+                            <xsl:when test="$stock = 'JVC'"/>
+                            <xsl:when test="$stock = 'KANS'"/>
+                            <xsl:when test="$stock = 'KCA'"/>
+                            <xsl:when test="$stock = 'D22'"/>
+                            <xsl:when test="$stock = 'Memorex'"/>
+                            <xsl:when test="$stock = 'EMTEC'"/>
+                            <xsl:when test="$stock = 'EACO'"/>
+                            <xsl:when test="$stock = 'D124'"/>
+                            <xsl:when test="$stock = 'Pathe_Freres'"/>
+                            <xsl:when test="$stock = 'Pathe_Paris'"/>
+                            <xsl:when test="$stock = 'Pathe_Vincennes_Paris'"/>
+                            <xsl:when test="$stock = 'D64L'"/>
+                            <xsl:when test="$stock = 'Kodak__ESTM'"/>
+                            <xsl:otherwise>
+                                <fiaf:hasStock>
+                                <rdf:Description>
+                                        <rdf:type rdf:resource="bfi://ontology/{$stock}"/>
+                                </rdf:Description>
+                                </fiaf:hasStock>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasTitle -->
 
-                    <!-- fiaf:hasTransferSpeed -->
-
                     <!-- fiaf:isElement -->
 
-                    <xsl:for-each select="physical_description[normalize-space(.)]"> 
+                    <xsl:for-each select="physical_description[normalize-space(.)]">
                         <xsl:variable name="element" select="translate(., ' ', '_')" />
                         <xsl:choose>
                             <xsl:when test="$element = 'Positive'"/>
                             <xsl:when test="$element = 'Magnetic'"/>
-                            <xsl:when test="$element = 'Master'"/>                            
+                            <xsl:when test="$element = 'Master'"/>
                             <xsl:when test="$element = 'Master_Positive'"/>
-                            <xsl:when test="$element = 'Negative'"/> 	
+                            <xsl:when test="$element = 'Negative'"/>
                             <xsl:when test="$element = 'Magnetic_recording'"/>
-                            <xsl:when test="$element = 'Cyan_Separation_Promaster'"/> 	
-                            <xsl:when test="$element = 'Yellow_Separation_Promaster'"/> 	
+                            <xsl:when test="$element = 'Cyan_Separation_Promaster'"/>
+                            <xsl:when test="$element = 'Yellow_Separation_Promaster'"/>
                             <xsl:when test="$element = 'Magenta_Separation_Promaster'"/>
                             <xsl:when test="$element = 'BW_Negative'"/>
                             <xsl:when test="$element = 'BW_and_Colour_Positive'"/>
-                            <xsl:when test="$element = 'Tinted_Positive'"/> 	
-                            <xsl:when test="$element = 'BW_and_Tinted_Positive'"/>	
-                            <xsl:when test="$element = 'Cyan_Separation_Negative'"/> 	
+                            <xsl:when test="$element = 'Tinted_Positive'"/>
+                            <xsl:when test="$element = 'BW_and_Tinted_Positive'"/>
+                            <xsl:when test="$element = 'Cyan_Separation_Negative'"/>
                             <xsl:when test="$element = 'Magenta_Separation_Negative'"/>
                             <xsl:when test="$element = 'Yellow_Separation_Negative'"/>
                             <xsl:when test="$element = 'Re-recorded_Negative'"/>
@@ -414,7 +477,7 @@
                                 <fiaf:isElement rdf:resource="bfi://vocabulary/element/{$element}" />
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:for-each> 
+                    </xsl:for-each>
 
                 </rdf:Description>
             </xsl:for-each>
