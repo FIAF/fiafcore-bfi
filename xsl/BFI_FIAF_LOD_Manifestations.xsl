@@ -16,7 +16,12 @@
     <xsl:template match="/">
         <rdf:RDF>
             <xsl:for-each select="record">
-                <!-- <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}"> -->
+                <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}">
+
+                    <!-- Temp until we assess manifestation-type situation. -->
+
+                    <rdf:type rdf:resource="bfi://ontology/manifestation" />
+
 
                     <!-- <xsl:choose>
                         <xsl:when test="manifestationlevel_type/value[@lang='0']">
@@ -82,14 +87,18 @@
 
                     <!-- fiaf:hasSoundCharacteristic -->
 
-                    <!-- <xsl:for-each select="sound_manifestation/value[@lang='0']">
-                        <xsl:variable name="sound_manifestation" select="translate(., ' ', '')"/>
-                        <fiaf:hasSoundCharacteristic rdf:resource="bfi://vocabulary/soundcharacteristic/{$sound_manifestation}"/>
-                    </xsl:for-each> -->
+                    <xsl:for-each select=".//sound_manifestation/value[@lang='0'][normalize-space(.)]">
+                        <xsl:variable name="soundcharacteristic" select="translate(., ' ', '_')" />
+                        <fiaf:hasSoundCharacteristic>
+                        <rdf:Description>
+                            <rdf:type rdf:resource="bfi://ontology/{$soundcharacteristic}"/>
+                        </rdf:Description>
+                        </fiaf:hasSoundCharacteristic>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasTitle -->
 
-                <!-- </rdf:Description> -->
+                </rdf:Description>
             </xsl:for-each>
         </rdf:RDF>
     </xsl:template>
