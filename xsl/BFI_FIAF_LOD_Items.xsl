@@ -79,10 +79,20 @@
 
                     <!-- fiaf:hasSoundCharacteristic -->
 
-                    <!-- <xsl:for-each select="sound_item/value[@lang='0']">
-                        <xsl:variable name="soundcharacteristic" select="translate(., ' ', '')" />
-                        <fiaf:hasSoundCharacteristic rdf:resource="bfi://vocabulary/soundcharacteristic/{$soundcharacteristic}" />
-                    </xsl:for-each> -->
+                    <xsl:for-each select=".//sound_item/value[@lang='0'][normalize-space(.)]">
+                        <xsl:variable name="soundcharacteristic" select="translate(., ' ', '_')" />
+                        <xsl:choose>
+                            <xsl:when test="$soundcharacteristic = 'Combined'"/>
+                            <xsl:when test="$soundcharacteristic = 'Mixed'"/>
+                            <xsl:otherwise>
+                                <fiaf:hasSoundCharacteristic>
+                                <rdf:Description>
+                                    <rdf:type rdf:resource="bfi://ontology/{$soundcharacteristic}"/>
+                                </rdf:Description>
+                                </fiaf:hasSoundCharacteristic>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasStatus -->
 
