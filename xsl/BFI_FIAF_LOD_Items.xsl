@@ -35,6 +35,8 @@
 
                     <!-- fiaf:hasBroadcastStandard -->
 
+                    <!-- Provided dataset may not contain this data. -->
+
                     <!-- fiaf:hasCarrier -->
 
                     <!-- fiaf:hasColourCharacteristic -->
