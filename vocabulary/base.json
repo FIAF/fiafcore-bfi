@@ -1,0 +1,9 @@
+{
+  "bfi://vocabulary/base/Safety": "https://vocabulary.fiafcore.org/base/Acetate",
+  "bfi://vocabulary/base/Video": "https://vocabulary.fiafcore.org/base/Polyester",
+  "bfi://vocabulary/base/Nitrate": "https://vocabulary.fiafcore.org/base/Nitrate",
+  "bfi://vocabulary/base/CTA": "https://vocabulary.fiafcore.org/base/Acetate",
+  "bfi://vocabulary/base/Polyester": "https://vocabulary.fiafcore.org/base/Polyester",
+  "bfi://vocabulary/base/Acetate": "https://vocabulary.fiafcore.org/base/Acetate",
+  "bfi://vocabulary/base/Mainly_safety": "https://vocabulary.fiafcore.org/base/fiaf:Acetate"
+}

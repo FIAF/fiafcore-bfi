@@ -21,8 +21,8 @@
 
                     <!-- fiaf:hasBase -->
 
-                    <!-- <xsl:for-each select="base/value[@lang='0']">
-                        <xsl:variable name="base" select="translate(., ' ', '')" />
+                    <xsl:for-each select="base/value[@lang='0'][normalize-space(.)]">
+                        <xsl:variable name="base" select="translate(., ' ', '_')" />
                         <xsl:choose>
                             <xsl:when test="$base = 'Acrylic'"/>
                             <xsl:when test="$base = 'Mixed'"/>
@@ -31,7 +31,7 @@
                                 <fiaf:hasBase rdf:resource="bfi://vocabulary/base/{$base}" />
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:for-each> -->
+                    </xsl:for-each>
 
                     <!-- fiaf:hasBroadcastStandard -->
 
