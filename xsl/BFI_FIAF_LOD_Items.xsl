@@ -98,10 +98,15 @@
 
                     <!-- fiaf:hasStatus -->
 
-                    <!-- <xsl:for-each select="copy_status/value[@lang='0']">
-                        <xsl:variable name="status" select="translate(., ' ', '')" />
-                        <fiaf:hasStatus rdf:resource="bfi://vocabulary/status/{$status}" />
-                    </xsl:for-each> -->
+                    <xsl:for-each select=".//copy_status/value[@lang='0'][normalize-space(.)]">
+                        <xsl:variable name="status" select="translate(., ' ', '_')" />
+                        <xsl:choose>
+                            <xsl:when test="$status = 'Status_pending'"/>
+                            <xsl:otherwise>
+                                <fiaf:hasStatus rdf:resource="bfi://vocabulary/status/{$status}" />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasStock -->
 

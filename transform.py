@@ -40,6 +40,7 @@ def harmonise(graph):
     graph = conform(graph, 'country', 'hasCountry')
     graph = conform(graph, 'genre', 'hasGenre')
     graph = conform(graph, 'element', 'isElement')
+    graph = conform(graph, 'status', 'hasStatus')
 
     return graph
 
