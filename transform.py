@@ -2,6 +2,7 @@ from lxml import etree
 import json
 import pandas
 import pathlib
+import pydash
 import rdflib
 import tqdm
 import uuid
@@ -48,11 +49,22 @@ def harmonise(graph):
 
 def authority(graph, df):
     local_ids = list()
+
+    # okay something to keep in mind here, we also need to be trawling for subclasses of these entity types
+    # eg, no one is "an agent", they are "a person" or "an organisation".
+
     for entity_type in ["Work", "Manifestation", "Item", "Carrier", "Agent"]:
         type_uri = rdflib.URIRef(f"https://ontology.fiafcore.org/{entity_type}")
-        local_ids += [
+        local_ids += pydash.uniq([
             str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, type_uri))
-        ]
+        ])
+
+    # special clause for "holding institution" claims.
+
+    holding = rdflib.URIRef("https://ontology.fiafcore.org/hasHoldingInstitution")
+    local_ids += pydash.uniq([
+        str(o) for s, p, o in graph.triples((None, holding, None))
+    ])
 
     authority = dict()
     for x in local_ids:
