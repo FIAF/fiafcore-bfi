@@ -68,9 +68,9 @@
 
                     <!-- fiaf:hasItem -->
 
-                    <!-- <xsl:for-each select="Parts">
+                    <xsl:for-each select="Parts">
                         <fiaf:hasItem rdf:resource="bfi://resource/item/{parts_reference.lref}" />
-                    </xsl:for-each> -->
+                    </xsl:for-each>
 
                     <!-- fiaf:hasLanguageUsage -->
 
