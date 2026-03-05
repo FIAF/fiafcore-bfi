@@ -22,7 +22,7 @@
 
                     <!-- fiaf:hasCountry -->
 
-                    <xsl:for-each select="production_country[normalize-space(.)]"> 
+                    <xsl:for-each select="production_country[normalize-space(.)]">
                         <xsl:variable name="country" select="translate(., ' ', '_')" />
                         <xsl:choose>
                             <xsl:when test="$country = 'USSR'"/>
@@ -31,10 +31,10 @@
                                 <fiaf:hasCountry rdf:resource="bfi://vocabulary/country/{$country}" />
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:for-each> 
+                    </xsl:for-each>
 
                     <!-- fiaf:hasEvent -->
-                    
+
                     <!-- <fiaf:hasEvent>
                         <rdf:Description>
                             <rdf:type rdf:resource="bfi://ontology/event/production_event"/>
@@ -97,7 +97,7 @@
 
                     <!-- fiaf:hasGenre -->
 
-                    <xsl:for-each select="Content_genre/content.genre[normalize-space(.)]"> 
+                    <xsl:for-each select="Content_genre/content.genre[normalize-space(.)]">
                         <xsl:variable name="apos">'</xsl:variable>
                         <xsl:variable name="genre1" select="translate(., ' ', '_')" />
                         <xsl:variable name="genre2" select="translate($genre1, $apos, '')" />
@@ -148,7 +148,7 @@
                                 <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre2}" />
                             </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:for-each> 
+                    </xsl:for-each>
 
                     <!-- fiaf:hasIdentifier -->
 
@@ -194,7 +194,11 @@
 
                     <!-- fiaf:hasVariant -->
 
+                    <!-- Provided dataset may not contain this data. -->
+
                     <!-- fiaf:hasWork -->
+
+                    <!-- Provided dataset may not contain this data. -->
 
                 </rdf:Description>
             </xsl:for-each>
