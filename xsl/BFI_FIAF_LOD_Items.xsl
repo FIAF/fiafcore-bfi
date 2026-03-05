@@ -65,7 +65,7 @@
 
                     <!-- fiaf:hasHoldingInstitution -->
 
-                    <!-- <fiaf:hasHoldingInstitution rdf:resource="bfi://ontology/holdinginstitution/bfi"/> -->
+                    <fiaf:hasHoldingInstitution rdf:resource="bfi://resource/agent/bfi"/>
 
                     <!-- fiaf:hasIdentifier -->
 
