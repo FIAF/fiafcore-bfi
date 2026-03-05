@@ -66,6 +66,13 @@ def authority(graph, df):
         str(o) for s, p, o in graph.triples((None, holding, None))
     ])
 
+    # alternate model is to detect resources by property, which avoids traversing subclasses.
+
+    prop = rdflib.URIRef("https://ontology.fiafcore.org/hasItem")
+    local_ids += pydash.uniq([
+        str(o) for s, p, o in graph.triples((None, prop, None))
+    ])
+
     authority = dict()
     for x in local_ids:
         match = df.loc[df.local.isin([str(x)])]
