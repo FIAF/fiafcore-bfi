@@ -23,5 +23,6 @@
   "bfi://ontology/Mute": "https://ontology.fiafcore.org/Mute",
   "bfi://ontology/Silent": "https://ontology.fiafcore.org/Silent",
   "bfi://ontology/Combined_as_Mute": "https://ontology.fiafcore.org/Mute",
-  "bfi://ontology/Combined_as_Sound": "https://ontology.fiafcore.org/Sound"
+  "bfi://ontology/Combined_as_Sound": "https://ontology.fiafcore.org/Sound",
+"bfi://ontology/identifier": "https://ontology.fiafcore.org/Identifier"
 }
