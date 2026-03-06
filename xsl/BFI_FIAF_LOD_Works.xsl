@@ -55,7 +55,7 @@
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="credit.name.lref"/>
                                                         </fiaf:hasIdentifierValue>
-                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi"/>
                                                     </rdf:Description>
                                                 </fiaf:hasIdentifier>
                                             </rdf:Description>
@@ -80,7 +80,7 @@
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="cast.name.lref"/>
                                                         </fiaf:hasIdentifierValue>
-                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi"/>
+                                                        <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi"/>
                                                     </rdf:Description>
                                                 </fiaf:hasIdentifier>
                                             </rdf:Description>
@@ -152,15 +152,15 @@
 
                     <!-- fiaf:hasIdentifier -->
 
-                    <!-- <fiaf:hasIdentifier>
+                    <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
                             <rdf:type rdf:resource="bfi://ontology/identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
-                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi" />
+                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi" />
                         </rdf:Description>
-                    </fiaf:hasIdentifier> -->
+                    </fiaf:hasIdentifier>
 
                     <!-- fiaf:hasLanguageUsage -->
 

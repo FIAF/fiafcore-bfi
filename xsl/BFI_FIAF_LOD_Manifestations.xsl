@@ -54,15 +54,15 @@
 
                     <!-- fiaf:hasIdentifier -->
 
-                    <!-- <fiaf:hasIdentifier>
+                    <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/manifestation/{@priref}">
                             <rdf:type rdf:resource="bfi://ontology/identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
-                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://ontology/authority/bfi" />
+                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi" />
                         </rdf:Description>
-                    </fiaf:hasIdentifier> -->
+                    </fiaf:hasIdentifier>
 
                     <!-- fiaf:hasImageCharacteristic -->
 

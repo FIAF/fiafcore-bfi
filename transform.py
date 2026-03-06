@@ -73,6 +73,11 @@ def authority(graph, df):
         str(o) for s, p, o in graph.triples((None, prop, None))
     ])
 
+    prop = rdflib.URIRef("https://ontology.fiafcore.org/hasIdentifierAuthority")
+    local_ids += pydash.uniq([
+        str(o) for s, p, o in graph.triples((None, prop, None))
+    ])
+
     authority = dict()
     for x in local_ids:
         match = df.loc[df.local.isin([str(x)])]
