@@ -170,27 +170,29 @@
                         <fiaf:hasManifestation rdf:resource="bfi://resource/manifestation/{parts_reference.lref}" />
                     </xsl:for-each> -->
 
-                    <!-- fiaf:hasSubject -->
-
-                    <!-- <xsl:for-each select="Content_subject/content.subject">
-                        <xsl:variable name="subject1" select="translate(., ' ', '_')" />
-                        <xsl:variable name="subject2" select="translate($subject1, '`', '_')" />
-                        <fiaf:hasSubject rdf:resource="bfi://vocabulary/subject/{$subject2}" />
-                    </xsl:for-each> -->
-
                     <!-- fiaf:hasTitle -->
 
-                    <!-- <xsl:for-each select="Title">
+                    <xsl:for-each select="Title">
                         <fiaf:hasTitle>
                             <rdf:Description>
                                 <xsl:variable name="title_type" select="translate(title.type/value[@lang='0'], ' ', '_')" />
+                                <xsl:choose>
+                                <xsl:when test="$title_type = 'Archive'">
+                                    <rdf:type rdf:resource="bfi://ontology/title/Title" />
+                                 </xsl:when>
+                                 <xsl:when test="$title_type = ''">
+                                     <rdf:type rdf:resource="bfi://ontology/title/Title" />
+                                  </xsl:when>
+                                <xsl:otherwise>
                                 <rdf:type rdf:resource="bfi://ontology/title/{$title_type}" />
+                                </xsl:otherwise>
+                                </xsl:choose>
                                 <fiaf:hasTitleValue>
-                                    <xsl:value-of select="concat(title.article, ' ', title)" />
+                                    <xsl:value-of select="normalize-space(concat(title.article, ' ', title))" />
                                 </fiaf:hasTitleValue>
                             </rdf:Description>
                         </fiaf:hasTitle>
-                    </xsl:for-each> -->
+                    </xsl:for-each>
 
                     <!-- fiaf:hasVariant -->
 
