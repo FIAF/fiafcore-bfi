@@ -1,0 +1,17 @@
+{
+  "bfi://vocabulary/format/35mm_Film": "https://vocabulary.fiafcore.org/format/35mmFilm",
+  "bfi://vocabulary/format/16mm_Film": "https://vocabulary.fiafcore.org/format/16mmFilm",
+  "bfi://vocabulary/format/DVD_(Digital_Versatile_Disc)": "https://vocabulary.fiafcore.org/format/DVD",
+  "bfi://vocabulary/format/Digital_Betacam": "https://vocabulary.fiafcore.org/format/DigtalBetacam",
+  "bfi://vocabulary/format/70mm_Film": "https://vocabulary.fiafcore.org/format/70mmFilm",
+  "bfi://vocabulary/format/Blu-ray": "https://vocabulary.fiafcore.org/format/BluRay",
+  "bfi://vocabulary/format/Super-35": "https://vocabulary.fiafcore.org/format/Super35mmFilm",
+  "bfi://vocabulary/format/8mm_Film": "https://vocabulary.fiafcore.org/format/8mmFilm",
+  "bfi://vocabulary/format/HDCAM": "https://vocabulary.fiafcore.org/format/HDCAMSR",
+  "bfi://vocabulary/format/9.5mm_Film": "https://vocabulary.fiafcore.org/format/9.5mmFilm",
+  "bfi://vocabulary/format/Super-16": "https://vocabulary.fiafcore.org/format/Super16mmFilm",
+  "bfi://vocabulary/format/Betacam_SP": "https://vocabulary.fiafcore.org/format/BetacamSP",
+  "bfi://vocabulary/format/Super_8mm_Film": "https://vocabulary.fiafcore.org/format/Super8mmFilm",
+  "bfi://vocabulary/format/ProRes_QuickTime": "https://vocabulary.fiafcore.org/format/Quicktime",
+  "bfi://vocabulary/format/Laser-Disc": "https://vocabulary.fiafcore.org/format/LaserDisc"
+}
