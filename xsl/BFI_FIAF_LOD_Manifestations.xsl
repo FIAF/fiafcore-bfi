@@ -74,16 +74,33 @@
 
                     <!-- fiaf:hasLanguageUsage -->
 
-                    <!-- <xsl:for-each select="language">
-                        <xsl:variable name="languageusage" select="translate(./language.type/value[@lang='0'], ' ', '')"/>
+                    <xsl:for-each select="language">
+                        <xsl:variable name="languageusage" select="translate(./language.type/value[@lang='0'], ' ', '_')"/>
                         <fiaf:hasLanguageUsage>
                             <rdf:Description>
-                                <rdf:type rdf:resource="bfi://ontology/languageusage/{$languageusage}" />
-                                <xsl:variable name="language" select="translate(language, ' ', '')"/>
+                                <xsl:choose>
+                                    <xsl:when test="$languageusage = ''">
+                                        <rdf:type rdf:resource="bfi://ontology/languageusage/languageusage" />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <rdf:type rdf:resource="bfi://ontology/languageusage/{$languageusage}" />
+                                   </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:variable name="language" select="translate(language, ' ', '_')"/>
+                                <xsl:choose>
+                                    <xsl:when test="$language = ''"/>
+                                    <xsl:when test="$language = 'Artificial_language'"/>
+                                    <xsl:when test="$language = 'Bantu'"/>
+                                    <xsl:when test="$language = 'Bodo'"/>
+                                    <xsl:when test="$language = 'British_Sign_Language'"/>
+                                    <xsl:when test="$language = 'Rajasthani'"/>
+                                    <xsl:otherwise>
                                 <fiaf:hasLanguage rdf:resource="bfi://vocabulary/language/{$language}"/>
+                                </xsl:otherwise>
+                             </xsl:choose>
                             </rdf:Description>
                         </fiaf:hasLanguageUsage>
-                    </xsl:for-each> -->
+                    </xsl:for-each>
 
                     <!-- fiaf:hasSoundCharacteristic -->
 
