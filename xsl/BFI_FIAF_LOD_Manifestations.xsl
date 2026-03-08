@@ -46,11 +46,44 @@
 
                     <!-- fiaf:hasFormat -->
 
-                    <!-- issue with double quotes in 2" videotape-->
-                    <!-- <xsl:for-each select="format_low_level"> -->
-                    <!-- <xsl:variable name="format" select="translate(., ' ', '')" /> -->
-                    <!-- <fiaf:hasFormat rdf:resource="bfi://vocabulary/format/{$format}" /> -->
-                    <!-- </xsl:for-each> -->
+                    <xsl:for-each select="format_low_level[normalize-space(.)]">
+                        <xsl:variable name="format1" select="translate(., ' ', '_')" />
+                        <xsl:variable name="format" select="translate($format1, '&quot;', '')" />
+                        <xsl:choose>
+                            <xsl:when test="$format = 'VHS_Videocassette'"/>
+                            <xsl:when test="$format = 'Videocassette'"/>
+                            <xsl:when test="$format = 'Digital_Cinema_Package_(DCP)'"/>
+                            <xsl:when test="$format = 'Digital_Video'"/>
+                            <xsl:when test="$format = 'Digital_Media'"/>
+                            <xsl:when test="$format = 'Phase_Alternate_Line_(PAL)'"/>
+                            <xsl:when test="$format = 'U-Matic_Videocassette'"/>
+                            <xsl:when test="$format = 'High-Definition_Video'"/>
+                            <xsl:when test="$format = 'DVD-ROM'"/>
+                            <xsl:when test="$format = '3-D_(Un-specified)'"/>
+                            <xsl:when test="$format = 'Imax'"/>
+                            <xsl:when test="$format = 'Betamax_Videocassette'"/>
+                            <xsl:when test="$format = 'IMF_Package_(IMP)'"/>
+                            <xsl:when test="$format = 'Mini-DV'"/>
+                            <xsl:when test="$format = '65mm_film'"/>
+                            <xsl:when test="$format = 'HD_Digital'"/>
+                            <xsl:when test="$format = 'Apple_ProRes_422_HQ'"/>
+                            <xsl:when test="$format = '25mm_Film'"/>
+                            <xsl:when test="$format = 'Betacam_Videocassette'"/>
+                            <xsl:when test="$format = 'VHS_Compact'"/>
+                            <xsl:when test="$format = '2_Videotape'"/>
+                            <xsl:when test="$format = 'V2000_Videocassette'"/>
+                            <xsl:when test="$format = 'Super-VHS'"/>
+                            <xsl:when test="$format = 'Reel_to_reel_tape'"/>
+                            <xsl:when test="$format = 'Scope_(Un-specified)'"/>
+                            <xsl:when test="$format = 'QuickTime'"/>
+                            <xsl:when test="$format = 'D2_Digital'"/>
+                            <xsl:when test="$format = 'D5-HD'"/>
+                            <xsl:when test="$format = '1_Videotape'"/>
+                        <xsl:otherwise>
+                        <fiaf:hasFormat rdf:resource="bfi://vocabulary/format/{$format}" />
+                        </xsl:otherwise>
+                         </xsl:choose>
+                    </xsl:for-each>
 
                     <!-- fiaf:hasIdentifier -->
 
