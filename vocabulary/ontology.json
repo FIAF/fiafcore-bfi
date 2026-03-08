@@ -30,5 +30,12 @@
   "bfi://ontology/title/Working": "https://ontology.fiafcore.org/WorkingTitle",
   "bfi://ontology/title/Help_search": "https://ontology.fiafcore.org/SearchTitle",
   "bfi://ontology/title/Acquisition": "https://ontology.fiafcore.org/AcquisitionTitle",
-  "bfi://ontology/title/Title": "https://ontology.fiafcore.org/Title"
+  "bfi://ontology/title/Title": "https://ontology.fiafcore.org/Title",
+  "bfi://ontology/languageusage/Dialogue_(original)": "https://ontology.fiafcore.org/SpokenLanguage",
+  "bfi://ontology/languageusage/languageusage": "https://ontology.fiafcore.org/LanguageUsage",
+  "bfi://ontology/languageusage/Subtitles": "https://ontology.fiafcore.org/Subtitles",
+  "bfi://ontology/languageusage/Intertitles": "https://ontology.fiafcore.org/Intertitles",
+  "bfi://ontology/languageusage/Credits": "https://ontology.fiafcore.org/Credits",
+  "bfi://ontology/languageusage/Dialogue_(dubbed)": "https://ontology.fiafcore.org/SpokenLanguage",
+  "bfi://ontology/languageusage/No_Dialogue": "https://ontology.fiafcore.org/NoDialogue"
 }
