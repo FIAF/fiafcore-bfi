@@ -1,7 +1,4 @@
 {
-
-
-
   "bfi://vocabulary/language/English": "https://vocabulary.fiafcore.org/language/English",
   "bfi://vocabulary/language/French": "https://vocabulary.fiafcore.org/language/French",
   "bfi://vocabulary/language/Italian": "https://vocabulary.fiafcore.org/language/Italian",
@@ -58,7 +55,6 @@
   "bfi://vocabulary/language/Swahili": "https://vocabulary.fiafcore.org/language/Swahili",
   "bfi://vocabulary/language/Zulu": "https://vocabulary.fiafcore.org/language/Zulu",
   "bfi://vocabulary/language/Greek": "https://vocabulary.fiafcore.org/language/Greek",
-
   "bfi://vocabulary/language/Lithuanian": "https://vocabulary.fiafcore.org/language/Lithuanian",
   "bfi://vocabulary/language/Bambara": "https://vocabulary.fiafcore.org/language/Bambara",
   "bfi://vocabulary/language/Icelandic": "https://vocabulary.fiafcore.org/language/Icelandic",
@@ -68,8 +64,6 @@
   "bfi://vocabulary/language/Egyptian": "https://vocabulary.fiafcore.org/language/Arabic",
   "bfi://vocabulary/language/Assamese": "https://vocabulary.fiafcore.org/language/Assamese",
   "bfi://vocabulary/language/Azerbaijani": "https://vocabulary.fiafcore.org/language/Azerbaijani",
-
-
   "bfi://vocabulary/language/Tibetan": "https://vocabulary.fiafcore.org/language/Tibetan",
   "bfi://vocabulary/language/Cornish": "https://vocabulary.fiafcore.org/language/Cornish",
   "bfi://vocabulary/language/Mongolian": "https://vocabulary.fiafcore.org/language/Mongolian",
@@ -80,7 +74,6 @@
   "bfi://vocabulary/language/Kannada": "https://vocabulary.fiafcore.org/language/Kannada",
   "bfi://vocabulary/language/Albanian": "https://vocabulary.fiafcore.org/language/Albanian",
   "bfi://vocabulary/language/Kirghiz": "https://vocabulary.fiafcore.org/language/Kyrgyz",
-
   "bfi://vocabulary/language/Pushto": "https://vocabulary.fiafcore.org/language/Pashto",
   "bfi://vocabulary/language/Kazakh": "https://vocabulary.fiafcore.org/language/Kazakh"
 }
