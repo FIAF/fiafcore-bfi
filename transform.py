@@ -46,6 +46,7 @@ def harmonise(graph):
     graph = conform(graph, 'language', 'hasLanguage')
     graph = conform(graph, 'format', 'hasFormat')
     graph = conform(graph, 'colourstandard', 'hasColourStandard')
+    graph = conform(graph, 'soundstandard', 'hasSoundStandard')
 
     return graph
 
