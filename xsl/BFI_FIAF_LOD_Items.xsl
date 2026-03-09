@@ -39,6 +39,8 @@
 
                     <!-- fiaf:hasCarrier -->
 
+                    <!-- Provided dataset may not contain this data. -->
+
                     <!-- fiaf:hasColourCharacteristic -->
 
                     <!-- fiaf:hasEvent -->
