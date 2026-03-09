@@ -18,20 +18,20 @@
             <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/manifestation/{@priref}">
 
-                    <!-- Temp until we assess manifestation-type situation. -->
+                    <!-- fiaf:Manifestation -->
 
-                    <rdf:type rdf:resource="bfi://ontology/manifestation" />
-
-
-                    <!-- <xsl:choose>
-                        <xsl:when test="manifestationlevel_type/value[@lang='0']">
-                            <xsl:variable name="manifest_type" select="translate(manifestationlevel_type/value[@lang='0'], ' ', '')"/>
-                            <rdf:type rdf:resource="bfi://ontology/manifestation/{$manifest_type}" />
+                    <xsl:variable name="manifest_type" select="translate(manifestationlevel_type_specific/value[@lang='0'], ' ', '_')"/>
+                    <xsl:choose>
+                        <xsl:when test="$manifest_type = ''">
+                            <rdf:type rdf:resource="bfi://ontology/manifestation/manifestation" />
+                        </xsl:when>
+                        <xsl:when test="$manifest_type = 'Unknown'">
+                            <rdf:type rdf:resource="bfi://ontology/manifestation/manifestation" />
                         </xsl:when>
                         <xsl:otherwise>
-                            <rdf:type rdf:resource="bfi://ontology/manifestation" />
+                            <rdf:type rdf:resource="bfi://ontology/manifestation/{$manifest_type}" />
                         </xsl:otherwise>
-                    </xsl:choose> -->
+                    </xsl:choose>
 
                     <!-- fiaf:hasColourCharacteristic -->
 

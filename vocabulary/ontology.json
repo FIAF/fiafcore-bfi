@@ -39,7 +39,7 @@
   "bfi://ontology/languageusage/Dialogue_(dubbed)": "https://ontology.fiafcore.org/SpokenLanguage",
   "bfi://ontology/languageusage/No_Dialogue": "https://ontology.fiafcore.org/NoDialogue",
   "bfi://ontology/event/production_event": "https://ontology.fiafcore.org/ProductionEvent",
-  "bfi://ontology/activity/Activity":"https://ontology.fiafcore.org/Activity",
+  "bfi://ontology/activity/Activity": "https://ontology.fiafcore.org/Activity",
   "bfi://ontology/activity/cast_member": "https://ontology.fiafcore.org/CastMember",
   "bfi://ontology/activity/Production_Company": "https://ontology.fiafcore.org/ProductionCompany",
   "bfi://ontology/activity/Assistant_Director": "https://ontology.fiafcore.org/AssistantDirector",
@@ -118,5 +118,14 @@
   "bfi://ontology/activity/Conductor": "https://ontology.fiafcore.org/MusicConductor",
   "bfi://ontology/agent": "https://ontology.fiafcore.org/Agent",
   "bfi://ontology/colourcharacteristic/Colour": "https://ontology.fiafcore.org/Colour",
-  "bfi://ontology/colourcharacteristic/BlackAndWhite": "https://ontology.fiafcore.org/BlackAndWhite"
+  "bfi://ontology/colourcharacteristic/BlackAndWhite": "https://ontology.fiafcore.org/BlackAndWhite",
+  "bfi://ontology/manifestation/manifestation": "https://ontology.fiafcore.org/Manifestation",
+  "bfi://ontology/manifestation/Theatrical_(country_unknown)": "https://ontology.fiafcore.org/TheatricalManifestation",
+  "bfi://ontology/manifestation/Non-Theatrical": "https://ontology.fiafcore.org/NonTheatricalManifestation",
+  "bfi://ontology/manifestation/Home_Viewing": "https://ontology.fiafcore.org/HomeViewingManifestation",
+  "bfi://ontology/manifestation/Theatrical_(main_country_of_origin)": "https://ontology.fiafcore.org/TheatricalManifestation",
+  "bfi://ontology/manifestation/Theatrical_(outside_main_country_of_origin)": "https://ontology.fiafcore.org/TheatricalManifestation",
+  "bfi://ontology/manifestation/Restoration": "https://ontology.fiafcore.org/RestorationManifestation",
+  "bfi://ontology/manifestation/Pre-Release": "https://ontology.fiafcore.org/PreReleaseManifestation",
+  "bfi://ontology/manifestation/Unreleased": "https://ontology.fiafcore.org/UnreleasedManifestation"
 }
