@@ -213,14 +213,35 @@
 
                     <!-- fiaf:hasSoundCharacteristic -->
 
-                    <xsl:for-each select=".//sound_manifestation/value[@lang='0'][normalize-space(.)]">
-                        <xsl:variable name="soundcharacteristic" select="translate(., ' ', '_')" />
-                        <fiaf:hasSoundCharacteristic>
+                    <xsl:variable name="soundcharacteristic" select="translate(sound_manifestation/value[@lang='0'][normalize-space(.)], ' ', '_')" />
+                    <fiaf:hasSoundCharacteristic>
                         <rdf:Description>
-                            <rdf:type rdf:resource="bfi://ontology/{$soundcharacteristic}"/>
+                            <xsl:choose>
+                                <xsl:when test="$soundcharacteristic = ''"/>
+                                <xsl:otherwise>
+                                    <rdf:type rdf:resource="bfi://ontology/soundcharacteristic/{$soundcharacteristic}"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:variable name="soundstandard" select="translate(sound_system_manifestation[normalize-space(.)], ' ', '_')"/>
+                                <xsl:choose>
+                                    <xsl:when test="$soundstandard = ''"/>
+                                    <xsl:when test="$soundstandard = 'Dolby'"/>
+                                    <xsl:when test="$soundstandard = 'Mono'"/>
+                                    <xsl:when test="$soundstandard = 'Stereo'"/>
+                                    <xsl:when test="$soundstandard = 'Dolby_SR'"/>
+                                    <xsl:when test="$soundstandard = 'Ultra-Stereo'"/>
+                                    <xsl:when test="$soundstandard = 'DataSat'"/>
+                                    <xsl:when test="$soundstandard = 'Combined_Optical_Sound'"/>
+                                    <xsl:when test="$soundstandard = 'Dolby_Digital_Surround_EX'"/>
+                                    <xsl:when test="$soundstandard = 'DTS_Sound_(Optical)'"/>
+                                    <xsl:when test="$soundstandard = 'Dolby_Atmos'"/>
+                                    <xsl:when test="$soundstandard = 'Surround_Stereo'"/>
+                                    <xsl:otherwise>
+                                        <fiaf:hasSoundStandard rdf:resource="bfi://vocabulary/soundstandard/{$soundstandard}"/>
+                                    </xsl:otherwise>
+                            </xsl:choose>
                         </rdf:Description>
-                        </fiaf:hasSoundCharacteristic>
-                    </xsl:for-each>
+                    </fiaf:hasSoundCharacteristic>
 
                     <!-- fiaf:hasTitle -->
 
