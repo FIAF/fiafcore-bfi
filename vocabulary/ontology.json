@@ -116,5 +116,7 @@
   "bfi://ontology/activity/Adaptation": "https://ontology.fiafcore.org/Adaptation",
   "bfi://ontology/activity/Key_Grip": "https://ontology.fiafcore.org/Grip",
   "bfi://ontology/activity/Conductor": "https://ontology.fiafcore.org/MusicConductor",
-  "bfi://ontology/agent": "https://ontology.fiafcore.org/Agent"
+  "bfi://ontology/agent": "https://ontology.fiafcore.org/Agent",
+  "bfi://ontology/colourcharacteristic/Colour": "https://ontology.fiafcore.org/Colour",
+  "bfi://ontology/colourcharacteristic/BlackAndWhite": "https://ontology.fiafcore.org/BlackAndWhite"
 }
