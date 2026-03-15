@@ -17,18 +17,41 @@
         <rdf:RDF>
             <xsl:for-each select="record">
                 <rdf:Description rdf:about="bfi://resource/item/{@priref}">
-                    <rdf:type rdf:resource="bfi://ontology/item" />
+                    <rdf:type rdf:resource="https://dev.fiafcore.org/Item" />
 
                     <!-- fiaf:hasBase -->
 
                     <xsl:for-each select="base/value[@lang='0'][normalize-space(.)]">
-                        <xsl:variable name="base" select="translate(., ' ', '_')" />
+                        <xsl:variable name="base" select="." />
                         <xsl:choose>
                             <xsl:when test="$base = 'Acrylic'"/>
                             <xsl:when test="$base = 'Mixed'"/>
                             <xsl:when test="$base = 'PVC'"/>
+                            <xsl:when test="$base = 'Safety'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'Video'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Polyester" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'Nitrate'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Nitrate" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'CTA'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'Polyester'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Polyester" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'Acetate'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                            </xsl:when>
+                            <xsl:when test="$base = 'Mainly safety'">
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                            </xsl:when>
                             <xsl:otherwise>
-                                <fiaf:hasBase rdf:resource="bfi://vocabulary/base/{$base}" />
+                                <xsl:message terminate="yes">
+                                    Error: Unexpected value "<xsl:value-of select="$base"/>".
+                                </xsl:message>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each>
@@ -67,17 +90,25 @@
 
                     <!-- fiaf:hasHoldingInstitution -->
 
-                    <fiaf:hasHoldingInstitution rdf:resource="bfi://resource/agent/bfi"/>
+                    <fiaf:hasHoldingInstitution>
+                        <rdf:Description rdf:about="bfi://resource/agent/bfi">
+                            <rdf:type rdf:resource="https://dev.fiafcore.org/Organisation" />
+                        </rdf:Description>
+                    </fiaf:hasHoldingInstitution>
 
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/item/{@priref}">
-                            <rdf:type rdf:resource="bfi://ontology/identifier" />
+                            <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@priref" />
+                                <xsl:value-of select="@uuid" />
                             </fiaf:hasIdentifierValue>
-                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi" />
+                            <fiaf:hasIdentifierAuthority>
+                                <rdf:Description rdf:about="bfi://resource/agent/bfi">
+                                    <rdf:type rdf:resource="https://dev.fiafcore.org/Organisation" />
+                                </rdf:Description>
+                            </fiaf:hasIdentifierAuthority>
                         </rdf:Description>
                     </fiaf:hasIdentifier>
 

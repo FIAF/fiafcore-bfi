@@ -7,7 +7,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:fiaf="https://ontology.fiafcore.org/">
+    xmlns:fiaf="https://dev.fiafcore.org/">
 
     <xsl:output method="xml" indent="yes" />
 
@@ -18,7 +18,7 @@
 
                     <!-- fiaf:Work -->
 
-                    <rdf:type rdf:resource="bfi://ontology/work" />
+                    <rdf:type rdf:resource="https://dev.fiafcore.org/Work" />
 
                     <!-- fiaf:hasCountry -->
 
@@ -1627,53 +1627,126 @@
 
                     <xsl:for-each select="Content_genre/content.genre[normalize-space(.)]">
                         <xsl:variable name="apos">'</xsl:variable>
-                        <xsl:variable name="genre1" select="translate(., ' ', '_')" />
-                        <xsl:variable name="genre2" select="translate($genre1, $apos, '')" />
+                        <xsl:variable name="genre" select="translate(., $apos, '')" />
                         <xsl:choose>
-                            <xsl:when test="$genre2 = 'Film_noir'"/>
-                            <xsl:when test="$genre2 = 'Police_drama'"/>
-                            <xsl:when test="$genre2 = 'Artists_Moving_Image'"/>
-                            <xsl:when test="$genre2 = 'Anthology'"/>
-                            <xsl:when test="$genre2 = 'Swashbuckling'"/>
-                            <xsl:when test="$genre2 = 'Martial_arts'"/>
-                            <xsl:when test="$genre2 = 'Sex_comedy'"/>
-                            <xsl:when test="$genre2 = 'Road_movie'"/>
-                            <xsl:when test="$genre2 = 'Spaghetti_western'"/>
-                            <xsl:when test="$genre2 = 'Disaster'"/>
-                            <xsl:when test="$genre2 = 'Performance'"/>
-                            <xsl:when test="$genre2 = 'Fairy_tale'"/>
-                            <xsl:when test="$genre2 = 'Documentary'"/>
-                            <xsl:when test="$genre2 = 'Amateur_film'"/>
-                            <xsl:when test="$genre2 = 'School_programme_and_Educational_film'"/>
-                            <xsl:when test="$genre2 = 'Drama-documentary'"/>
-                            <xsl:when test="$genre2 = 'Documentary_drama'"/>
-                            <xsl:when test="$genre2 = 'Parody'"/>
-                            <xsl:when test="$genre2 = 'Blaxploitation'"/>
-                            <xsl:when test="$genre2 = 'Industry_sponsored_film'"/>
-                            <xsl:when test="$genre2 = 'Variety_show'"/>
-                            <xsl:when test="$genre2 = 'Promotional'"/>
-                            <xsl:when test="$genre2 = 'Pornography'"/>
-                            <xsl:when test="$genre2 = 'Student_film'"/>
-                            <xsl:when test="$genre2 = 'Farce'"/>
-                            <xsl:when test="$genre2 = 'Public_Information_Filler'"/>
-                            <xsl:when test="$genre2 = 'Home_movie'"/>
-                            <xsl:when test="$genre2 = 'Government_sponsored_film'"/>
-                            <xsl:when test="$genre2 = 'Film_serial'"/>
-                            <xsl:when test="$genre2 = 'Performance_music_video'"/>
-                            <xsl:when test="$genre2 = 'Training'"/>
-                            <xsl:when test="$genre2 = 'Advert'"/>
-                            <xsl:when test="$genre2 = 'Trick_film'"/>
-                            <xsl:when test="$genre2 = 'Sketch_show'"/>
-                            <xsl:when test="$genre2 = 'Adventure'"/>
-                            <xsl:when test="$genre2 = 'Music_video'"/>
-                            <xsl:when test="$genre2 = 'Puppet_(live-action)'"/>
-                            <xsl:when test="$genre2 = 'Australian_western'"/>
-                            <xsl:when test="$genre2 = 'Action_and_Adventure'">
-                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/Action" />
-                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/Adventure" />
+                            <xsl:when test="$genre = 'Film noir'"/>
+                            <xsl:when test="$genre = 'Police drama'"/>
+                            <xsl:when test="$genre = 'Artists Moving Image'"/>
+                            <xsl:when test="$genre = 'Anthology'"/>
+                            <xsl:when test="$genre = 'Swashbuckling'"/>
+                            <xsl:when test="$genre = 'Martial arts'"/>
+                            <xsl:when test="$genre = 'Sex comedy'"/>
+                            <xsl:when test="$genre = 'Road movie'"/>
+                            <xsl:when test="$genre = 'Spaghetti western'"/>
+                            <xsl:when test="$genre = 'Disaster'"/>
+                            <xsl:when test="$genre = 'Performance'"/>
+                            <xsl:when test="$genre = 'Fairy tale'"/>
+                            <xsl:when test="$genre = 'Documentary'"/>
+                            <xsl:when test="$genre = 'Amateur film'"/>
+                            <xsl:when test="$genre = 'School programme and Educational film'"/>
+                            <xsl:when test="$genre = 'Drama-documentary'"/>
+                            <xsl:when test="$genre = 'Documentary drama'"/>
+                            <xsl:when test="$genre = 'Parody'"/>
+                            <xsl:when test="$genre = 'Blaxploitation'"/>
+                            <xsl:when test="$genre = 'Industry sponsored film'"/>
+                            <xsl:when test="$genre = 'Variety show'"/>
+                            <xsl:when test="$genre = 'Promotional'"/>
+                            <xsl:when test="$genre = 'Pornography'"/>
+                            <xsl:when test="$genre = 'Student film'"/>
+                            <xsl:when test="$genre = 'Farce'"/>
+                            <xsl:when test="$genre = 'Public Information Filler'"/>
+                            <xsl:when test="$genre = 'Home movie'"/>
+                            <xsl:when test="$genre = 'Government sponsored film'"/>
+                            <xsl:when test="$genre = 'Film serial'"/>
+                            <xsl:when test="$genre = 'Performance music video'"/>
+                            <xsl:when test="$genre = 'Training'"/>
+                            <xsl:when test="$genre = 'Advert'"/>
+                            <xsl:when test="$genre = 'Trick film'"/>
+                            <xsl:when test="$genre = 'Sketch show'"/>
+                            <xsl:when test="$genre = 'Adventure'"/>
+                            <xsl:when test="$genre = 'Music video'"/>
+                            <xsl:when test="$genre = 'Puppet (live-action)'"/>
+                            <xsl:when test="$genre = 'Australian western'"/>
+                            <xsl:when test="$genre = 'Action and Adventure'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Action" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Adventure" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Drama" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Comedy'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Comedy" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Crime'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Crime" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Musical'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Musical" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'War'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/War" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Thriller'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Thriller" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Romance'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Romantic" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Western'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Western" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Horror'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Horror" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Period drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Historical" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Science Fiction'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ScienceFiction" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Fantasy'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Fantasy" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Biopic'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Biographical" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Historical drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Historical" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Melodrama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Melodrama" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Detective drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Detective" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Childrens'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Childrens" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Sport'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Sports" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Gangster'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Gangster" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Animation'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Animation" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Action'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Action" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Adventure'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Adventure" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Medical drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Medical" />
+                            </xsl:when>
+                            <xsl:when test="$genre = 'Legal and Courtroom drama'">
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Courtroom" />
                             </xsl:when>
                             <xsl:otherwise>
-                                <fiaf:hasGenre rdf:resource="bfi://vocabulary/genre/{$genre2}" />
+                                <xsl:message terminate="yes">
+                                    Error: Unexpected value "<xsl:value-of select="$genre"/>".
+                                </xsl:message>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each>
@@ -1682,11 +1755,15 @@
 
                     <fiaf:hasIdentifier>
                         <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
-                            <rdf:type rdf:resource="bfi://ontology/identifier" />
+                            <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@priref" />
+                                <xsl:value-of select="@uuid" />
                             </fiaf:hasIdentifierValue>
-                            <fiaf:hasIdentifierAuthority rdf:resource="bfi://resource/agent/bfi" />
+                            <fiaf:hasIdentifierAuthority>
+                                <rdf:Description rdf:about="bfi://resource/agent/bfi">
+                                    <rdf:type rdf:resource="https://dev.fiafcore.org/Organisation" />
+                                </rdf:Description>
+                            </fiaf:hasIdentifierAuthority>
                         </rdf:Description>
                     </fiaf:hasIdentifier>
 

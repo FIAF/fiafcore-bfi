@@ -1,94 +1,43 @@
-from lxml import etree
-import json
+
 import pandas
 import pathlib
-import pydash
 import rdflib
 import tqdm
 import uuid
+from lxml import etree
 
+def subclasses(parent):
 
-def conform(graph_in, vocabulary, prop):
+    fiafcore_path = 'https://raw.githubusercontent.com/FIAF/fiafcore/refs/heads/develop/fiafcore.ttl'
+    fiafcore = rdflib.Graph().parse(fiafcore_path)
+    query = """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?subClass
+        WHERE {
+            ?subClass rdfs:subClassOf+ <"""+parent+"""> .
+        }
+    """
+    result = [row.subClass for row in fiafcore.query(query)]
+    result.append(rdflib.URIRef(parent))
 
-    vocab_path = pathlib.Path.cwd() / 'vocabulary' / f'{vocabulary}.json'
-    if not vocab_path.exists():
-        raise Exception(f'{vocab_path} not found.')
+    return result
 
-    with open(vocab_path) as vocab:
-        vocab = json.load(vocab)
+def authority(graph, df, types):
 
-    turtle_string = graph_in.serialize(format="turtle")
-    for a,b in vocab.items():
-        turtle_string = turtle_string.replace(f'<{a}>', f'<{b}>')
-
-    if prop == 'rdf:type':
-        prop_uri = rdflib.RDF.type
-    else:
-        prop_uri = rdflib.URIRef(f"https://ontology.fiafcore.org/{prop}")
-
-    turtle_rdf = rdflib.Graph().parse(data=turtle_string, format="turtle")
-    for s,p,o in turtle_rdf.triples((None, prop_uri, None)):
-
-        if str(o) not in vocab.values():
-            raise Exception('@@@', s, o)
-
-    return turtle_rdf
-
-
-def harmonise(graph):
-
-    graph = conform(graph, 'ontology', 'rdf:type')
-    graph = conform(graph, 'country', 'hasCountry')
-    graph = conform(graph, 'genre', 'hasGenre')
-    graph = conform(graph, 'element', 'isElement')
-    graph = conform(graph, 'status', 'hasStatus')
-    graph = conform(graph, 'base', 'hasBase')
-    graph = conform(graph, 'language', 'hasLanguage')
-    graph = conform(graph, 'format', 'hasFormat')
-    graph = conform(graph, 'colourstandard', 'hasColourStandard')
-    graph = conform(graph, 'soundstandard', 'hasSoundStandard')
-
-    return graph
-
-
-def authority(graph, df):
     local_ids = list()
-
-    # okay something to keep in mind here, we also need to be trawling for subclasses of these entity types
-    # eg, no one is "an agent", they are "a person" or "an organisation".
-
-    for entity_type in ["Work", "Manifestation", "Item", "Carrier", "Agent"]:
-        type_uri = rdflib.URIRef(f"https://ontology.fiafcore.org/{entity_type}")
-        local_ids += pydash.uniq([
-            str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, type_uri))
-        ])
-
-    # special clause for "holding institution" claims.
-
-    holding = rdflib.URIRef("https://ontology.fiafcore.org/hasHoldingInstitution")
-    local_ids += pydash.uniq([
-        str(o) for s, p, o in graph.triples((None, holding, None))
-    ])
-
-    # alternate model is to detect resources by property, which avoids traversing subclasses.
-
-    prop = rdflib.URIRef("https://ontology.fiafcore.org/hasItem")
-    local_ids += pydash.uniq([
-        str(o) for s, p, o in graph.triples((None, prop, None))
-    ])
-
-    prop = rdflib.URIRef("https://ontology.fiafcore.org/hasIdentifierAuthority")
-    local_ids += pydash.uniq([
-        str(o) for s, p, o in graph.triples((None, prop, None))
-    ])
+    for t in types:
+        t = rdflib.URIRef(str(t))
+        local_ids += [
+            str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, t))
+        ]
 
     authority = dict()
     for x in local_ids:
         match = df.loc[df.local.isin([str(x)])]
         if len(match) > 1:
-            raise Exception("This should not happen.")
+            raise Exception("This should never happen.")
         elif len(match) < 1:
-            minted_id = f"https://resource.fiafcore.org/{str(uuid.uuid4())}"
+            minted_id = f"https://dev.fiafcore.org/{str(uuid.uuid4())}"
             authority[x] = minted_id
             df.loc[len(df)] = [(minted_id), (x)]
         else:
@@ -100,15 +49,14 @@ def authority(graph, df):
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
+def transform(tier, df, res):
 
-def transform(tier, df):
-    graph = rdflib.Graph()
-
+    tier_graph = rdflib.Graph()
     xml_items = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
     xml_items = [x for x in xml_items.findall(".//record")]
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
-        # # testing filter.
+        # testing filter.
 
         # if 'Work' in tier:
         #     if xml.find('.//priref').text != '150335572':
@@ -129,19 +77,15 @@ def transform(tier, df):
         result = transform(xml)
         g = rdflib.Graph().parse(data=str(result), format="xml")
 
-        # harmonise vocabulary terms to fiafcore.
-
-        g = harmonise(g)
-
         # fiafcore authority ids for entities.
 
-        g = authority(g, df)
+        g = authority(g, df, res)
 
         # collect output into main graph.
 
-        graph += g
+        tier_graph += g
 
-    return graph
+    return tier_graph
 
 
 def main():
@@ -152,16 +96,25 @@ def main():
     else:
         auth_df = pandas.read_parquet(auth_path)
 
-    # initiate a graph.
+    # gather resource types.
 
-    g = rdflib.Graph()
-    g.bind("fiaf", rdflib.Namespace("https://ontology.fiafcore.org/"))
+    resource_types = list()
+    resource_types += subclasses('https://dev.fiafcore.org/Agent')
+    resource_types += subclasses('https://dev.fiafcore.org/Work')
+    resource_types += subclasses('https://dev.fiafcore.org/Manifestation')
+    resource_types += subclasses('https://dev.fiafcore.org/Item')
+    resource_types += subclasses('https://dev.fiafcore.org/Carrier')
+
+    # top level graph.
+
+    graph = rdflib.Graph()
+    graph.bind("fiaf", rdflib.Namespace("https://dev.fiafcore.org/"))
 
     # transform tier.
 
-    g += transform("BFI_FIAF_LOD_Works", auth_df)
-    g += transform("BFI_FIAF_LOD_Manifestations", auth_df)
-    g += transform("BFI_FIAF_LOD_Items", auth_df)
+    # graph += transform("BFI_FIAF_LOD_Works", auth_df, resource_types)
+    # graph += transform("BFI_FIAF_LOD_Manifestations", auth_df, resource_types)
+    graph += transform("BFI_FIAF_LOD_Items", auth_df, resource_types)
 
     # update authority parquet.
 
@@ -169,11 +122,14 @@ def main():
 
     # save graph.
 
-    g.serialize(destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl", format="turtle")
+    graph.serialize(
+        destination=pathlib.Path.cwd() / "fiafcore_bfi.ttl",
+        format="turtle"
+    )
 
     # total triples.
 
-    print(f'{len(g)} triples.')
+    print(f'{len(graph)} triples.')
 
 
 if __name__ == "__main__":
