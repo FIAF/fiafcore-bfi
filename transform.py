@@ -22,6 +22,12 @@ def subclasses(parent):
 
     return result
 
+def legal_entities():
+
+    pass
+
+    # raise Exception('@@@')
+
 def authority(graph, df, types):
 
     local_ids = list()
@@ -56,7 +62,7 @@ def transform(tier, df, res):
     xml_items = [x for x in xml_items.findall(".//record")]
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
-        # testing filter.
+        # # testing filter.
 
         # if 'Work' in tier:
         #     if xml.find('.//priref').text != '150335572':
@@ -80,6 +86,10 @@ def transform(tier, df, res):
         # fiafcore authority ids for entities.
 
         g = authority(g, df, res)
+
+        # validate fiafcore entities.
+        #
+        # # TODO.
 
         # collect output into main graph.
 
@@ -105,6 +115,10 @@ def main():
     resource_types += subclasses('https://dev.fiafcore.org/Item')
     resource_types += subclasses('https://dev.fiafcore.org/Carrier')
 
+    # gather legal entities.
+
+    legal = legal_entities()
+
     # top level graph.
 
     graph = rdflib.Graph()
@@ -112,8 +126,8 @@ def main():
 
     # transform tier.
 
-    # graph += transform("BFI_FIAF_LOD_Works", auth_df, resource_types)
-    # graph += transform("BFI_FIAF_LOD_Manifestations", auth_df, resource_types)
+    graph += transform("BFI_FIAF_LOD_Works", auth_df, resource_types)
+    graph += transform("BFI_FIAF_LOD_Manifestations", auth_df, resource_types)
     graph += transform("BFI_FIAF_LOD_Items", auth_df, resource_types)
 
     # update authority parquet.

@@ -1,9 +1,0 @@
-{
-  "bfi://vocabulary/soundstandard/Dolby_Digital": "https://vocabulary.fiafcore.org/soundsystem/DolbyDigital",
-  "bfi://vocabulary/soundstandard/SDDS": "https://vocabulary.fiafcore.org/soundsystem/SDDS",
-  "bfi://vocabulary/soundstandard/DTS_(sound)": "https://vocabulary.fiafcore.org/soundsystem/DTS",
-  "bfi://vocabulary/soundstandard/Dolby_Stereo_SR": "https://vocabulary.fiafcore.org/soundsystem/DolbyStereo",
-  "bfi://vocabulary/soundstandard/Digital_Stereo": "https://vocabulary.fiafcore.org/soundsystem/DolbyStereo",
-  "bfi://vocabulary/soundstandard/Separate_Magnetic_Sound": "https://vocabulary.fiafcore.org/soundsystem/Magnetic",
-  "bfi://vocabulary/soundstandard/Combined_Magnetic_Sound": "https://vocabulary.fiafcore.org/soundsystem/Magentic"
-}
