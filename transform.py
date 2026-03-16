@@ -22,12 +22,6 @@ def subclasses(parent):
 
     return result
 
-def legal_entities():
-
-    pass
-
-    # raise Exception('@@@')
-
 def authority(graph, df, types):
 
     local_ids = list()
@@ -87,10 +81,6 @@ def transform(tier, df, res):
 
         g = authority(g, df, res)
 
-        # validate fiafcore entities.
-        #
-        # # TODO.
-
         # collect output into main graph.
 
         tier_graph += g
@@ -114,10 +104,6 @@ def main():
     resource_types += subclasses('https://dev.fiafcore.org/Manifestation')
     resource_types += subclasses('https://dev.fiafcore.org/Item')
     resource_types += subclasses('https://dev.fiafcore.org/Carrier')
-
-    # gather legal entities.
-
-    legal = legal_entities()
 
     # top level graph.
 
