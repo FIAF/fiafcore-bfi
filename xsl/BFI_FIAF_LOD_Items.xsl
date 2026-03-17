@@ -28,25 +28,25 @@
                             <xsl:when test="$base = 'Mixed'"/>
                             <xsl:when test="$base = 'PVC'"/>
                             <xsl:when test="$base = 'Safety'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/AcetateBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'Video'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Polyester" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/PolyesterBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'Nitrate'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Nitrate" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/NitrateBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'CTA'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/AcetateBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'Polyester'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Polyester" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/PolyesterBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'Acetate'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/AcetateBase" />
                             </xsl:when>
                             <xsl:when test="$base = 'Mainly safety'">
-                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/Acetate" />
+                                <fiaf:hasBase rdf:resource="https://dev.fiafcore.org/AcetateBase" />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:message terminate="yes">

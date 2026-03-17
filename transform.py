@@ -1,14 +1,29 @@
 
 import pandas
 import pathlib
+import pydash
 import rdflib
+import requests
 import tqdm
 import uuid
 from lxml import etree
 
+def local_ontology():
+
+    fiafcore_path = pathlib.Path.cwd() / 'fiafcore.ttl'
+    if not fiafcore_path.exists():
+        r = requests.get('https://raw.githubusercontent.com/FIAF/fiafcore/refs/heads/develop/fiafcore.ttl')
+        if r.status_code != 200:
+            raise Exception('API call failed.')
+        with open(fiafcore_path, 'w') as local_fiafcore:
+            local_fiafcore.write(r.text)
+
 def subclasses(parent):
 
-    fiafcore_path = 'https://raw.githubusercontent.com/FIAF/fiafcore/refs/heads/develop/fiafcore.ttl'
+    fiafcore_path = pathlib.Path.cwd() / 'fiafcore.ttl'
+    if not fiafcore_path.exists():
+        raise Exception('Local ontology file not found.')
+
     fiafcore = rdflib.Graph().parse(fiafcore_path)
     query = """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -49,6 +64,37 @@ def authority(graph, df, types):
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
+def validate(g):
+
+    fiafcore_path = pathlib.Path.cwd() / 'fiafcore.ttl'
+    if not fiafcore_path.exists():
+        raise Exception('Local ontology file not found.')
+
+    fiafcore = rdflib.Graph().parse(fiafcore_path)
+    fiafcore_entities = list()
+    for s,p,o in fiafcore:
+        fiafcore_entities.append(s)
+        if type(o) is type(rdflib.URIRef('')):
+            fiafcore_entities.append(o)
+
+    fiafcore_entities = [x for x in pydash.uniq(fiafcore_entities) if 'fiafcore' in str(x)]
+
+    graph_entities = list()
+    for s,p,o in g:
+        graph_entities.append(s)
+        if type(o) is type(rdflib.URIRef('')):
+            graph_entities.append(o)
+
+    graph_entities = [x for x in pydash.uniq(graph_entities) if 'fiafcore' in str(x)]
+
+    for x in graph_entities:
+        if len(pathlib.Path(x).name) == 36:
+            continue
+
+        if x not in fiafcore_entities:
+            raise Exception(f'{x} not found in fiafcore.')
+
+
 def transform(tier, df, res):
 
     tier_graph = rdflib.Graph()
@@ -81,6 +127,10 @@ def transform(tier, df, res):
 
         g = authority(g, df, res)
 
+       # validate entities.
+
+        validate(g)
+
         # collect output into main graph.
 
         tier_graph += g
@@ -95,6 +145,10 @@ def main():
         auth_df = pandas.DataFrame(columns=["fiafcore", "local"])
     else:
         auth_df = pandas.read_parquet(auth_path)
+
+    # local instance of ontology.
+
+    local_ontology()
 
     # gather resource types.
 

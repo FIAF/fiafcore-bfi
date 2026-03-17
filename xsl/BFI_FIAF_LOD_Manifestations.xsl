@@ -216,6 +216,7 @@
                             <xsl:when test="$format = 'D2 Digital'"/>
                             <xsl:when test="$format = 'D5-HD'"/>
                             <xsl:when test="$format = '1 Videotape'"/>
+                            <xsl:when test="$format = 'Super-35'"/>
                             <xsl:when test="$format = '35mm Film'">
                                 <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/35mmFilm" />
                             </xsl:when>
@@ -226,16 +227,13 @@
                                 <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/DVD" />
                             </xsl:when>
                             <xsl:when test="$format = 'Digital Betacam'">
-                                <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/DigtalBetacam" />
+                                <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/DigitalBetacam" />
                             </xsl:when>
                             <xsl:when test="$format = '70mm Film'">
                                 <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/70mmFilm" />
                             </xsl:when>
                             <xsl:when test="$format = 'Blu-ray'">
                                 <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/BluRay" />
-                            </xsl:when>
-                            <xsl:when test="$format = 'Super-35'">
-                                <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/Super35mmFilm" />
                             </xsl:when>
                             <xsl:when test="$format = '8mm Film'">
                                 <fiaf:hasFormat rdf:resource="https://dev.fiafcore.org/8mmFilm" />

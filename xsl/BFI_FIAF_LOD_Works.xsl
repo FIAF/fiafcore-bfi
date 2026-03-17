@@ -2336,80 +2336,80 @@
                             <xsl:when test="$genre = 'Puppet (live-action)'"/>
                             <xsl:when test="$genre = 'Australian western'"/>
                             <xsl:when test="$genre = 'Action and Adventure'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Action" />
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Adventure" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ActionFilm" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/AdventureFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Drama" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/DramaFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Comedy'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Comedy" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ComedyFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Crime'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Crime" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/CrimeFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Musical'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Musical" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/MusicalFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'War'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/War" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/WarFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Thriller'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Thriller" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ThrillerFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Romance'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Romantic" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/RomanticFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Western'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Western" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/WesternFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Horror'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Horror" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/HorrorFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Period drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Historical" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/HistoricalFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Science Fiction'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ScienceFiction" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ScienceFictionFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Fantasy'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Fantasy" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/FantasyFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Biopic'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Biographical" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/BiographicalFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Historical drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Historical" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/HistoricalFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Melodrama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Melodrama" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/MelodramaFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Detective drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Detective" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/DetectiveFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Childrens'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Childrens" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ChildrensFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Sport'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Sports" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/SportsFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Gangster'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Gangster" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/GangsterFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Animation'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Animation" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/AnimationFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Action'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Action" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/ActionFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Adventure'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Adventure" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/AdventureFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Medical drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Medical" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/MedicalFilm" />
                             </xsl:when>
                             <xsl:when test="$genre = 'Legal and Courtroom drama'">
-                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/Courtroom" />
+                                <fiaf:hasGenre rdf:resource="https://dev.fiafcore.org/CourtroomFilm" />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:message terminate="yes">

@@ -1,4 +1,5 @@
 xml/
 xml_full/
 .env
+fiafcore.ttl
 fiafcore_bfi.ttl
