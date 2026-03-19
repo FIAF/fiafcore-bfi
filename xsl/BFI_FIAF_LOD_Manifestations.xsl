@@ -270,7 +270,7 @@
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
-                        <rdf:Description rdf:about="bfi://identifier/manifestation/{@priref}">
+                        <rdf:Description>
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@uuid" />

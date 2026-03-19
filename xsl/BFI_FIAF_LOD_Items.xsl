@@ -93,13 +93,14 @@
                     <fiaf:hasHoldingInstitution>
                         <rdf:Description rdf:about="bfi://resource/agent/bfi">
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Organisation" />
+                            <rdfs:label>British Film Institute</rdfs:label>
                         </rdf:Description>
                     </fiaf:hasHoldingInstitution>
 
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
-                        <rdf:Description rdf:about="bfi://identifier/item/{@priref}">
+                        <rdf:Description>
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@uuid" />

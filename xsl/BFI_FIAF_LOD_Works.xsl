@@ -472,7 +472,7 @@
 
                     <fiaf:hasEvent>
                         <rdf:Description>
-                            <rdf:type rdf:resource="bfi://ontology/event/production_event"/>
+                            <rdf:type rdf:resource="https://dev.fiafcore.org/ProductionEvent"/>
                             <xsl:for-each select="credits">
                                 <fiaf:hasActivity>
                                     <rdf:Description>
@@ -2231,7 +2231,7 @@
                                                     <xsl:value-of select="credit.name"/>
                                                 </rdfs:label>
                                                 <fiaf:hasIdentifier>
-                                                    <rdf:Description rdf:about="bfi://identifier/agent/{credit.name.lref}">
+                                                    <rdf:Description>
                                                         <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="credit.name.lref"/>
@@ -2271,7 +2271,7 @@
                                                     <xsl:value-of select="cast.name"/>
                                                 </rdfs:label>
                                                 <fiaf:hasIdentifier>
-                                                    <rdf:Description rdf:about="bfi://identifier/agent/{cast.name.lref}">
+                                                    <rdf:Description>
                                                         <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier"/>
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="cast.name.lref"/>
@@ -2422,10 +2422,10 @@
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
-                        <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
+                        <rdf:Description>
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@uuid" />
+                                <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
                             <fiaf:hasIdentifierAuthority>
                                 <rdf:Description rdf:about="bfi://resource/agent/bfi">

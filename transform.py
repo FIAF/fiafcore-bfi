@@ -46,15 +46,30 @@ def authority(graph, df, types):
             str(s) for s, p, o in graph.triples((None, rdflib.RDF.type, t))
         ]
 
+    # TODO: with current architecture, manifestation etc uris are not being picked up
+    # and converted during the processing of work data as, within this specific context,
+    # those entities have no type declaration. Codeblock below is a temp solution to this.
+
+    for string_match in [
+        'bfi://resource/manifestation/',
+        'bfi://resource/item/',
+    ]:
+        for s,p,o in graph.triples((None, None, None)):
+            if string_match in str(s):
+                local_ids.append(str(s))
+            if string_match in str(o):
+                local_ids.append(str(o))
+
     authority = dict()
-    for x in local_ids:
+    for x in pydash.uniq(local_ids):
         match = df.loc[df.local.isin([str(x)])]
         if len(match) > 1:
             raise Exception("This should never happen.")
         elif len(match) < 1:
             minted_id = f"https://dev.fiafcore.org/{str(uuid.uuid4())}"
-            authority[x] = minted_id
-            df.loc[len(df)] = [(minted_id), (x)]
+            authority[str(x)] = minted_id
+            df.loc[len(df)] = [(minted_id), (str(x))]
+            print(x, minted_id)
         else:
             authority[x] = match.iloc[0]["fiafcore"]
 
@@ -100,6 +115,9 @@ def transform(tier, df, res):
     tier_graph = rdflib.Graph()
     xml_items = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
     xml_items = [x for x in xml_items.findall(".//record")]
+
+    xml_items = xml_items[:100] # filter for medium dataset.
+
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
         # # testing filter.
