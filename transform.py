@@ -116,23 +116,23 @@ def transform(tier, df, res):
     xml_items = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
     xml_items = [x for x in xml_items.findall(".//record")]
 
-    xml_items = xml_items[:100] # filter for medium dataset.
+    # xml_items = xml_items[:100] # filter for medium dataset.
 
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
-        # # testing filter.
+        # testing filter.
 
-        # if 'Work' in tier:
-        #     if xml.find('.//priref').text != '150335572':
-        #         continue
+        if 'Work' in tier:
+            if xml.find('.//priref').text != '150041825':
+                continue
 
-        # if 'Manifestation' in tier:
-        #     if xml.find('.//priref').text != '152100981':
-        #         continue
+        if 'Manifestation' in tier:
+            if xml.find('.//priref').text != '158166668':
+                continue
 
-        # if 'Item' in tier:
-        #     if xml.find('.//priref').text != '152772493':
-        #         continue
+        if 'Item' in tier:
+            if xml.find('.//priref').text != '158166707':
+                continue
 
         # transformation via xslt to fiafcore structures.
 
@@ -155,6 +155,63 @@ def transform(tier, df, res):
 
     return tier_graph
 
+def labelling(gr):
+
+    work_types = subclasses('https://dev.fiafcore.org/Work')
+
+    works = list()
+    for work_type in work_types:
+        print(work_type)
+        for s,p,o in gr.triples((None, rdflib.RDF.type, rdflib.URIRef(work_type))):
+            works.append(s)
+
+    title_prop1 = rdflib.URIRef('https://dev.fiafcore.org/hasTitle')
+    title_prop2 = rdflib.URIRef('https://dev.fiafcore.org/hasTitleValue')
+    for work in works:
+        titles = list()
+        for s,p,o in gr.triples((None, title_prop1, None)):
+            for a,b,c in gr.triples((None, title_prop2, None)):
+                titles.append(c)
+
+        if not len(titles):
+            raise Exception('No titles found.')
+
+        # TODO: Space here to have some more elaborate logic for title selection.
+
+        title = titles[0]
+        gr.add((work, rdflib.RDFS.label, rdflib.Literal(f'{title}')))
+
+        events = list()
+        event_prop = rdflib.URIRef('https://dev.fiafcore.org/hasEvent')
+        for a,b,event in gr.triples((work, event_prop, None)):
+            events.append(event)
+        for event in events:
+            gr.add((event, rdflib.RDFS.label, rdflib.Literal(f'{title} Event')))
+
+        manifestations = list()
+        manifestation_prop = rdflib.URIRef('https://dev.fiafcore.org/hasManifestation')
+        for a,b,manifestation in gr.triples((work, manifestation_prop, None)):
+            manifestations.append(manifestation)
+        for manifestation in manifestations:
+            gr.add((manifestation, rdflib.RDFS.label, rdflib.Literal(f'{title} Manifestation')))
+
+        items = list()
+        item_prop = rdflib.URIRef('https://dev.fiafcore.org/hasItem')
+        for manifestation in manifestations:
+            for a,b,item in gr.triples((manifestation, item_prop, None)):
+                items.append(item)
+        for item in items:
+            gr.add((item, rdflib.RDFS.label, rdflib.Literal(f'{title} Item')))
+
+        carriers = list()
+        carrier_prop = rdflib.URIRef('https://dev.fiafcore.org/hasCarrier')
+        for item in items:
+            for a,b,carrier in gr.triples((item, carrier_prop, None)):
+                carriers.append(carrier)
+        for carrier in carriers:
+            gr.add((carrier, rdflib.RDFS.label, rdflib.Literal(f'{title} Carrier')))
+
+    return gr
 
 def main():
 
@@ -187,6 +244,10 @@ def main():
     graph += transform("BFI_FIAF_LOD_Works", auth_df, resource_types)
     graph += transform("BFI_FIAF_LOD_Manifestations", auth_df, resource_types)
     graph += transform("BFI_FIAF_LOD_Items", auth_df, resource_types)
+
+    # apply labels to entities.
+
+    graph = labelling(graph)
 
     # update authority parquet.
 
