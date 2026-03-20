@@ -79,7 +79,7 @@ def authority(graph, df, types):
 
     return rdflib.Graph().parse(data=turtle_string, format="turtle")
 
-def validate(g):
+def validate(gr):
 
     fiafcore_path = pathlib.Path.cwd() / 'fiafcore.ttl'
     if not fiafcore_path.exists():
@@ -95,7 +95,7 @@ def validate(g):
     fiafcore_entities = [x for x in pydash.uniq(fiafcore_entities) if 'fiafcore' in str(x)]
 
     graph_entities = list()
-    for s,p,o in g:
+    for s,p,o in gr:
         graph_entities.append(s)
         if type(o) is type(rdflib.URIRef('')):
             graph_entities.append(o)
@@ -109,6 +109,20 @@ def validate(g):
         if x not in fiafcore_entities:
             raise Exception(f'{x} not found in fiafcore.')
 
+    fiafcore_properties = list()
+    fiafcore_properties += [s for s,p,o in fiafcore.triples((None, rdflib.RDF.type, rdflib.OWL.ObjectProperty))]
+    fiafcore_properties += [s for s,p,o in fiafcore.triples((None, rdflib.RDF.type, rdflib.OWL.DatatypeProperty))]
+    for s,p,o in gr:
+        if p in fiafcore_properties:
+            continue
+        elif p in [
+            rdflib.RDF.type,
+            rdflib.RDFS.label]:
+            continue
+        else:
+            raise Exception(f'{p} not found in fiafcore.')
+
+    return gr
 
 def transform(tier, df, res):
 
@@ -145,7 +159,7 @@ def transform(tier, df, res):
 
         g = authority(g, df, res)
 
-       # validate entities.
+       # validate entities and properties.
 
         validate(g)
 
@@ -161,7 +175,6 @@ def labelling(gr):
 
     works = list()
     for work_type in work_types:
-        print(work_type)
         for s,p,o in gr.triples((None, rdflib.RDF.type, rdflib.URIRef(work_type))):
             works.append(s)
 
