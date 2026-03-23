@@ -273,7 +273,7 @@
                         <rdf:Description>
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@uuid" />
+                                <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
                             <fiaf:hasIdentifierAuthority>
                                 <rdf:Description rdf:about="bfi://resource/agent/bfi">

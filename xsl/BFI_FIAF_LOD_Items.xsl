@@ -103,7 +103,7 @@
                         <rdf:Description>
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
-                                <xsl:value-of select="@uuid" />
+                                <xsl:value-of select="@priref" />
                             </fiaf:hasIdentifierValue>
                             <fiaf:hasIdentifierAuthority>
                                 <rdf:Description rdf:about="bfi://resource/agent/bfi">
@@ -116,35 +116,38 @@
                     <!-- fiaf:hasSoundCharacteristic -->
 
                     <xsl:for-each select=".//sound_item/value[@lang='0'][normalize-space(.)]">
-                        <fiaf:hasSoundCharacteristic>
-                            <rdf:Description>
-                                <xsl:variable name="soundcharacteristic" select="translate(., ' ', ' ')" />
-                                <xsl:choose>
-                                    <xsl:when test="$soundcharacteristic = 'Combined'"/>
-                                    <xsl:when test="$soundcharacteristic = 'Mixed'"/>
-                                    <xsl:when test="$soundcharacteristic = 'Sound'">
-                                        <rdf:type rdf:resource="https://dev.fiafcore.org/Sound" />
-                                    </xsl:when>
-                                    <xsl:when test="$soundcharacteristic = 'Mute'">
-                                        <rdf:type rdf:resource="https://dev.fiafcore.org/Mute" />
-                                    </xsl:when>
-                                    <xsl:when test="$soundcharacteristic = 'Silent'">
-                                        <rdf:type rdf:resource="https://dev.fiafcore.org/Silent" />
-                                    </xsl:when>
-                                    <xsl:when test="$soundcharacteristic = 'Combined as Mute'">
-                                        <rdf:type rdf:resource="https://dev.fiafcore.org/Mute" />
-                                    </xsl:when>
-                                    <xsl:when test="$soundcharacteristic = 'Combined as Sound'">
-                                        <rdf:type rdf:resource="https://dev.fiafcore.org/Sound" />
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:message terminate="yes">
-                                            Error: Unexpected value "<xsl:value-of select="$soundcharacteristic"/>".
-                                        </xsl:message>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </rdf:Description>
-                        </fiaf:hasSoundCharacteristic>
+                        <xsl:variable name="soundcharacteristic" select="translate(., ' ', ' ')" />
+                        <xsl:if test="$soundcharacteristic">
+                            <fiaf:hasSoundCharacteristic>
+                                <rdf:Description>
+                                    <xsl:choose>
+                                        <!-- TODO: if it is not a known sound char, you want to skip it -->
+                                        <xsl:when test="$soundcharacteristic = 'Combined'"/>
+                                        <xsl:when test="$soundcharacteristic = 'Mixed'"/>
+                                        <xsl:when test="$soundcharacteristic = 'Sound'">
+                                            <rdf:type rdf:resource="https://dev.fiafcore.org/Sound" />
+                                        </xsl:when>
+                                        <xsl:when test="$soundcharacteristic = 'Mute'">
+                                            <rdf:type rdf:resource="https://dev.fiafcore.org/Mute" />
+                                        </xsl:when>
+                                        <xsl:when test="$soundcharacteristic = 'Silent'">
+                                            <rdf:type rdf:resource="https://dev.fiafcore.org/Silent" />
+                                        </xsl:when>
+                                        <xsl:when test="$soundcharacteristic = 'Combined as Mute'">
+                                            <rdf:type rdf:resource="https://dev.fiafcore.org/Mute" />
+                                        </xsl:when>
+                                        <xsl:when test="$soundcharacteristic = 'Combined as Sound'">
+                                            <rdf:type rdf:resource="https://dev.fiafcore.org/Sound" />
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:message terminate="yes">
+                                                Error: Unexpected value "<xsl:value-of select="$soundcharacteristic"/>".
+                                            </xsl:message>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </rdf:Description>
+                            </fiaf:hasSoundCharacteristic>
+                        </xsl:if>
                     </xsl:for-each>
 
                     <!-- fiaf:hasStatus -->

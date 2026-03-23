@@ -2247,16 +2247,19 @@
                             <xsl:for-each select="cast">
                                 <fiaf:hasActivity>
                                     <rdf:Description>
-                                        <xsl:variable name="activity" select="translate(credit.type, '&amp;', '')" />
+                                        <xsl:variable name="activity" select="translate(cast.credit_type, '&amp;', '')" />
                                         <xsl:choose>
-                                            <xsl:when test="not($activity)">
+                                            <!-- <xsl:when test="not($activity)">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
-                                            </xsl:when>
-                                            <xsl:when test="$activity = ''">
+                                            </xsl:when> -->
+                                            <!-- <xsl:when test="$activity = ''">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
-                                            </xsl:when>
+                                            </xsl:when> -->
                                             <xsl:when test="$activity = 'music performance'">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'cast member'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/CastMember" />
                                             </xsl:when>
                                             <xsl:otherwise>
                                                <xsl:message terminate="yes">

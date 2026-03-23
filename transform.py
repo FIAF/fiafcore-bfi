@@ -134,19 +134,19 @@ def transform(tier, df, res):
 
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
-        # testing filter.
+        # # testing filter.
 
-        if 'Work' in tier:
-            if xml.find('.//priref').text != '150041825':
-                continue
+        # if 'Work' in tier:
+        #     if xml.find('.//priref').text != '150041825':
+        #         continue
 
-        if 'Manifestation' in tier:
-            if xml.find('.//priref').text != '158166668':
-                continue
+        # if 'Manifestation' in tier:
+        #     if xml.find('.//priref').text != '158166668':
+        #         continue
 
-        if 'Item' in tier:
-            if xml.find('.//priref').text != '158166707':
-                continue
+        # if 'Item' in tier:
+        #     if xml.find('.//priref').text != '158166707':
+        #         continue
 
         # transformation via xslt to fiafcore structures.
 
@@ -182,8 +182,8 @@ def labelling(gr):
     title_prop2 = rdflib.URIRef('https://dev.fiafcore.org/hasTitleValue')
     for work in works:
         titles = list()
-        for s,p,o in gr.triples((None, title_prop1, None)):
-            for a,b,c in gr.triples((None, title_prop2, None)):
+        for s,p,o in gr.triples((work, title_prop1, None)):
+            for a,b,c in gr.triples((o, title_prop2, None)):
                 titles.append(c)
 
         if not len(titles):
