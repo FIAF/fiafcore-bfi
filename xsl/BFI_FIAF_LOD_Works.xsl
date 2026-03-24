@@ -2249,14 +2249,35 @@
                                     <rdf:Description>
                                         <xsl:variable name="activity" select="translate(cast.credit_type, '&amp;', '')" />
                                         <xsl:choose>
-                                            <!-- <xsl:when test="not($activity)">
+                                            <xsl:when test="$activity = 'voice'">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
-                                            </xsl:when> -->
-                                            <!-- <xsl:when test="$activity = ''">
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'on-screen participant'">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
-                                            </xsl:when> -->
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'commentator'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'dancer'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'interviewee'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'introduction'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'presenter'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = '[Subject of Film]'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
                                             <xsl:when test="$activity = 'music performance'">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/Activity" />
+                                            </xsl:when>
+                                            <xsl:when test="$activity = 'narrator'">
+                                                <rdf:type rdf:resource="https://dev.fiafcore.org/Narrator" />
                                             </xsl:when>
                                             <xsl:when test="$activity = 'cast member'">
                                                 <rdf:type rdf:resource="https://dev.fiafcore.org/CastMember" />

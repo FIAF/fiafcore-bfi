@@ -130,7 +130,7 @@ def transform(tier, df, res):
     xml_items = etree.parse(str(pathlib.Path.cwd() / "xml" / f"{tier}.xml"))
     xml_items = [x for x in xml_items.findall(".//record")]
 
-    # xml_items = xml_items[:100] # filter for medium dataset.
+    # xml_items = xml_items[:500] # filter for medium dataset.
 
     for xml in tqdm.tqdm(xml_items, desc=tier):
 
