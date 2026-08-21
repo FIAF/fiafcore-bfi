@@ -100,7 +100,7 @@
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
-                        <rdf:Description>
+                        <rdf:Description rdf:about="bfi://identifier/item/{@priref}">
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@priref" />

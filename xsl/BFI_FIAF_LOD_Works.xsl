@@ -2231,7 +2231,7 @@
                                                     <xsl:value-of select="credit.name"/>
                                                 </rdfs:label>
                                                 <fiaf:hasIdentifier>
-                                                    <rdf:Description>
+                                                    <rdf:Description rdf:about="bfi://identifier/agent/{credit.name.lref}">
                                                         <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="credit.name.lref"/>
@@ -2295,7 +2295,7 @@
                                                     <xsl:value-of select="cast.name"/>
                                                 </rdfs:label>
                                                 <fiaf:hasIdentifier>
-                                                    <rdf:Description>
+                                                    <rdf:Description rdf:about="bfi://identifier/agent/{cast.name.lref}">
                                                         <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier"/>
                                                         <fiaf:hasIdentifierValue>
                                                             <xsl:value-of select="cast.name.lref"/>
@@ -2446,7 +2446,7 @@
                     <!-- fiaf:hasIdentifier -->
 
                     <fiaf:hasIdentifier>
-                        <rdf:Description>
+                        <rdf:Description rdf:about="bfi://identifier/work/{@priref}">
                             <rdf:type rdf:resource="https://dev.fiafcore.org/Identifier" />
                             <fiaf:hasIdentifierValue>
                                 <xsl:value-of select="@priref" />
